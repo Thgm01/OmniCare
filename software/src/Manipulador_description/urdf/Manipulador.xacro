@@ -256,7 +256,7 @@
   </collision>
 </link>
 
-<link name="garra2_1">
+<!-- <link name="garra2_1">
   <inertial>
     <origin xyz="0.01093628964519689 0.037592376140302364 -0.0014998275383646398" rpy="0 0 0"/>
     <mass value="0.03924138621244227"/>
@@ -275,7 +275,7 @@
       <mesh filename="file://$(find Manipulador_description)/meshes/garra2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
-</link>
+</link> -->
 
 <link name="garra2_1">
   <inertial>
@@ -298,7 +298,7 @@
   </collision>
 </link>
 
-<link name="garra1_1">
+<!-- <link name="garra1_1">
   <inertial>
     <origin xyz="-0.010936289645196936 0.03759237614030231 -0.0014998275383646398" rpy="0 0 0"/>
     <mass value="0.03924138621244253"/>
@@ -317,7 +317,7 @@
       <mesh filename="file://$(find Manipulador_description)/meshes/garra1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
-</link>
+</link> -->
 
 <link name="garra1_1">
   <inertial>
