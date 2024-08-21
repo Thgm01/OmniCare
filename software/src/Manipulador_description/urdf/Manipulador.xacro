@@ -212,15 +212,16 @@
   <parent link="garra_base_1"/>
   <child link="garra_esquerda_1"/>
   <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="0.0" lower="-0.025" effort="100" velocity="100"/>
+  <limit upper="0.0" lower="-0.025" effort="100" velocity="100.0"/>
 </joint>
 
 <joint name="garra_direita_to_garra_base" type="prismatic">
   <origin xyz="0.0 -0.02 0.05" rpy="0 0 0"/>
   <parent link="garra_base_1"/>
   <child link="garra_direita_1"/>
-  <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="0.025" lower="0.0" effort="100" velocity="100"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="0.025" lower="0.0" effort="100" velocity="100.0"/>
+  <mimic joint="garra_esquerda_to_garra_base"/>
 </joint>
 
 </robot>

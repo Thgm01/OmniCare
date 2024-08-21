@@ -33,3 +33,13 @@ joint_limits:
     max_velocity: 0
     has_acceleration_limits: false
     max_acceleration: 0
+  garra_direita_to_garra_base:
+    has_velocity_limits: true
+    max_velocity: 100.0
+    has_acceleration_limits: false
+    max_acceleration: 0
+  garra_esquerda_to_garra_base:
+    has_velocity_limits: true
+    max_velocity: 100.0
+    has_acceleration_limits: false
+    max_acceleration: 0
