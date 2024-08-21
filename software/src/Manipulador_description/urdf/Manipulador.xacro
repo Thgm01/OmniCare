@@ -6,9 +6,9 @@
 <xacro:include filename="$(find Manipulador_description)/urdf/Manipulador.gazebo" />
 <link name="base_link">
   <inertial>
-    <origin xyz="-6.683893549462274e-17 -3.341946774731137e-17 0.025918185846936326" rpy="0 0 0"/>
-    <mass value="0.8011273694086438"/>
-    <inertia ixx="0.000987" iyy="0.000987" izz="0.001447" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+    <origin xyz="0.0 4.129580929120314e-17 0.028013158131108173" rpy="0 0 0"/>
+    <mass value="0.8644380061148665"/>
+    <inertia ixx="0.001136" iyy="0.001136" izz="0.001604" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -27,19 +27,19 @@
 
 <link name="base_cima_1">
   <inertial>
-    <origin xyz="-2.6820091032339434e-17 0.0 0.019754160064952037" rpy="0 0 0"/>
-    <mass value="0.6655023467583219"/>
-    <inertia ixx="0.000522" iyy="0.000899" izz="0.000634" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+    <origin xyz="1.1970149693281284e-14 1.9829071827633267e-17 0.018193196281490173" rpy="0 0 0"/>
+    <mass value="0.6751009456259592"/>
+    <inertia ixx="0.000924" iyy="0.000555" izz="0.000645" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.0 -0.0 -0.0619" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.0 -0.0669" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/base_cima_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.0 -0.0 -0.0619" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.0 -0.0669" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/base_cima_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -48,19 +48,19 @@
 
 <link name="braco1_1">
   <inertial>
-    <origin xyz="-0.027500000000000014 0.024885744760774764 0.043103358031751804" rpy="0 0 0"/>
-    <mass value="1.7885488191560883"/>
-    <inertia ixx="0.003235" iyy="0.003054" izz="0.001665" ixy="0.0" iyz="-0.001203" ixz="-0.0"/>
+    <origin xyz="-2.740279011686726e-15 0.0275 0.049401867400451355" rpy="0 0 0"/>
+    <mass value="1.7863299950890772"/>
+    <inertia ixx="0.003721" iyy="0.003209" izz="0.000967" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.0275 -0.0 -0.1122" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0275 -0.1172" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.0275 -0.0 -0.1122" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0275 -0.1172" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -69,19 +69,19 @@
 
 <link name="braco2_1">
   <inertial>
-    <origin xyz="-0.027499999999999896 0.03953330120001172 1.724616353615538e-07" rpy="0 0 0"/>
-    <mass value="1.8221525702323502"/>
-    <inertia ixx="0.002313" iyy="0.000603" izz="0.002325" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+    <origin xyz="1.8642595259125363e-15 0.0275 0.03974999999999998" rpy="0 0 0"/>
+    <mass value="1.833463405716618"/>
+    <inertia ixx="0.002376" iyy="0.002348" izz="0.000597" ixy="0.0" iyz="0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.0275 -0.0625 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.0275 -0.2422" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.0275 -0.0625 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.0275 -0.2422" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -90,19 +90,19 @@
 
 <link name="braco3_1">
   <inertial>
-    <origin xyz="2.9108173071921536e-16 0.015541973111065366 1.7246163541706494e-07" rpy="0 0 0"/>
-    <mass value="0.28360026181182435"/>
-    <inertia ixx="9.7e-05" iyy="0.000122" izz="0.000129" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+    <origin xyz="-0.008884231331327241 0.027499999999999997 0.042248373954598184" rpy="0 0 0"/>
+    <mass value="2.0477712972739655"/>
+    <inertia ixx="0.002084" iyy="0.001584" izz="0.001847" ixy="0.0" iyz="-0.0" ixz="9.9e-05"/>
   </inertial>
   <visual>
-    <origin xyz="-0.0 -0.1595 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.0275 -0.3217" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.0 -0.1595 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.0275 -0.3217" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/braco3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -111,336 +111,116 @@
 
 <link name="garra_base_1">
   <inertial>
-    <origin xyz="0.017499999999990055 0.025416727672805783 -0.003316228091903628" rpy="0 0 0"/>
-    <mass value="0.09722190139840811"/>
-    <inertia ixx="5.7e-05" iyy="2e-05" izz="6.8e-05" ixy="0.0" iyz="6e-06" ixz="-0.0"/>
+    <origin xyz="-1.0054196140392503e-14 -4.834082544152743e-14 0.018196855600843498" rpy="0 0 0"/>
+    <mass value="0.16038383685906207"/>
+    <inertia ixx="8.6e-05" iyy="4.6e-05" izz="5.9e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.0175 -0.1875 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.0 -0.39885" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/garra_base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.0175 -0.1875 -0.220453" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.0 -0.39885" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Manipulador_description)/meshes/garra_base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
 
-<link name="motor_1">
+<link name="garra_esquerda_1">
   <inertial>
-    <origin xyz="0.004966420304875185 5.215931214719305e-09 -0.01091923627005667" rpy="0 0 0"/>
-    <mass value="0.04590106877913345"/>
-    <inertia ixx="2e-06" iyy="4e-06" izz="2e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+    <origin xyz="0.0 -0.007993386734000607 0.05263724971926159" rpy="0 0 0"/>
+    <mass value="0.03761222131658412"/>
+    <inertia ixx="2.4e-05" iyy="2.2e-05" izz="2e-06" ixy="0.0" iyz="5e-06" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.0125 -0.23 -0.212453" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.02 -0.44885" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/motor_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Manipulador_description)/meshes/garra_esquerda_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.0125 -0.23 -0.212453" rpy="0 0 0"/>
+    <origin xyz="-0.0 -0.02 -0.44885" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/motor_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Manipulador_description)/meshes/garra_esquerda_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
 
-<link name="garra_cima_1">
+<link name="garra_direita_1">
   <inertial>
-    <origin xyz="0.012500000000011275 0.005562173741026466 0.011500172461635372" rpy="0 0 0"/>
-    <mass value="0.04289538732519903"/>
-    <inertia ixx="6e-06" iyy="9e-06" izz="1.4e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+    <origin xyz="2.3171326867272047e-19 0.007993386734000405 0.05263724971926148" rpy="0 0 0"/>
+    <mass value="0.037612221316584114"/>
+    <inertia ixx="2.4e-05" iyy="2.2e-05" izz="2e-06" ixy="0.0" iyz="-5e-06" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.0125 -0.23 -0.215453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.02 -0.44885" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_cima_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Manipulador_description)/meshes/garra_direita_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.0125 -0.23 -0.215453" rpy="0 0 0"/>
+    <origin xyz="-0.0 0.02 -0.44885" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_cima_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="garra_engrenagem2_1">
-  <inertial>
-    <origin xyz="-0.007668585799883939 0.007668591015755177 -0.004999827538364615" rpy="0 0 0"/>
-    <mass value="0.01771965861392608"/>
-    <inertia ixx="2e-06" iyy="2e-06" izz="5e-06" ixy="2e-06" iyz="-0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.0125 -0.23 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_engrenagem2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.0125 -0.23 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_engrenagem2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="garra_braco2_1">
-  <inertial>
-    <origin xyz="-0.014142135623730963 0.014142140839662198 -0.004999827538364615" rpy="0 0 0"/>
-    <mass value="0.010344806337400354"/>
-    <inertia ixx="1e-06" iyy="1e-06" izz="2e-06" ixy="1e-06" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.0075 -0.25 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_braco2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.0075 -0.25 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_braco2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="garra_engrenagem1_1">
-  <inertial>
-    <origin xyz="0.0076685857998839285 0.007668591015755177 -0.004999827538364615" rpy="0 0 0"/>
-    <mass value="0.01771965861392608"/>
-    <inertia ixx="2e-06" iyy="2e-06" izz="5e-06" ixy="-2e-06" iyz="-0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.0125 -0.23 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_engrenagem1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.0125 -0.23 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_engrenagem1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="garra_braco1_1">
-  <inertial>
-    <origin xyz="0.014142135623730935 0.014142140839662198 -0.00499982753836456" rpy="0 0 0"/>
-    <mass value="0.010344806337400328"/>
-    <inertia ixx="1e-06" iyy="1e-06" izz="2e-06" ixy="-1e-06" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.0075 -0.25 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_braco1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.0075 -0.25 -0.225453" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra_braco1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<!-- <link name="garra2_1">
-  <inertial>
-    <origin xyz="0.01093628964519689 0.037592376140302364 -0.0014998275383646398" rpy="0 0 0"/>
-    <mass value="0.03924138621244227"/>
-    <inertia ixx="2.1e-05" iyy="2e-06" izz="2.3e-05" ixy="-5e-06" iyz="0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.040784 -0.258284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.040784 -0.258284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link> -->
-
-<link name="garra2_1">
-  <inertial>
-    <origin xyz="0.005936289645196893 0.0175923761403024 -0.0014998275383646398" rpy="0 0 0"/>
-    <mass value="0.03924138621244227"/>
-    <inertia ixx="2.1e-05" iyy="2e-06" izz="2.3e-05" ixy="-5e-06" iyz="0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.035784 -0.278284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.035784 -0.278284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<!-- <link name="garra1_1">
-  <inertial>
-    <origin xyz="-0.010936289645196936 0.03759237614030231 -0.0014998275383646398" rpy="0 0 0"/>
-    <mass value="0.03924138621244253"/>
-    <inertia ixx="2.1e-05" iyy="2e-06" izz="2.3e-05" ixy="5e-06" iyz="0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.040784 -0.258284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.040784 -0.258284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link> -->
-
-<link name="garra1_1">
-  <inertial>
-    <origin xyz="-0.005936289645196938 0.017592376140302346 -0.0014998275383646398" rpy="0 0 0"/>
-    <mass value="0.03924138621244253"/>
-    <inertia ixx="2.1e-05" iyy="2e-06" izz="2.3e-05" ixy="5e-06" iyz="0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.035784 -0.278284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.035784 -0.278284 -0.221953" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Manipulador_description)/meshes/garra1_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Manipulador_description)/meshes/garra_direita_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
 
 <joint name="base_cima_to_base_link" type="continuous">
-  <origin xyz="0.0 0.0 0.0619" rpy="0 0 0"/>
+  <origin xyz="0.0 0.0 0.0669" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="base_cima_1"/>
   <axis xyz="0.0 0.0 -1.0"/>
 </joint>
 
 <joint name="braco1_to_base_cima" type="continuous">
-  <origin xyz="0.0275 0.0 0.0503" rpy="0 0 0"/>
+  <origin xyz="-0.0 -0.0275 0.0503" rpy="0 0 0"/>
   <parent link="base_cima_1"/>
   <child link="braco1_1"/>
-  <axis xyz="1.0 0.0 0.0"/>
+  <axis xyz="0.0 -1.0 0.0"/>
 </joint>
 
 <joint name="braco2_to_braco1" type="continuous">
-  <origin xyz="0.0 0.0625 0.108253" rpy="0 0 0"/>
+  <origin xyz="0.0 0.0 0.125" rpy="0 0 0"/>
   <parent link="braco1_1"/>
   <child link="braco2_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
+  <axis xyz="0.0 -1.0 0.0"/>
 </joint>
 
 <joint name="braco3_to_braco2" type="continuous">
-  <origin xyz="-0.0275 0.097 0.0" rpy="0 0 0"/>
+  <origin xyz="0.0 0.0 0.0795" rpy="0 0 0"/>
   <parent link="braco2_1"/>
   <child link="braco3_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
+  <axis xyz="0.0 -1.0 0.0"/>
 </joint>
 
-<joint name="garra_base_to_braco3" type="continuous">
-  <origin xyz="-0.0175 0.028 0.0" rpy="0 0 0"/>
+<joint name="garra_base_to braco3" type="continuous">
+  <origin xyz="0.0 0.0275 0.07715" rpy="0 0 0"/>
   <parent link="braco3_1"/>
   <child link="garra_base_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
+  <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
-<joint name="motor_to_garra_base" type="fixed">
-  <origin xyz="0.005 0.0425 -0.008" rpy="0 0 0"/>
+<joint name="garra_esquerda_to_garra_base" type="prismatic">
+  <origin xyz="0.0 0.02 0.05" rpy="0 0 0"/>
   <parent link="garra_base_1"/>
-  <child link="motor_1"/>
+  <child link="garra_esquerda_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit upper="0.0" lower="-0.025" effort="100" velocity="100"/>
 </joint>
 
-<joint name="garra_cima_to_garra_base" type="fixed">
-  <origin xyz="0.005 0.0425 -0.005" rpy="0 0 0"/>
+<joint name="garra_direita_to_garra_base" type="prismatic">
+  <origin xyz="0.0 -0.02 0.05" rpy="0 0 0"/>
   <parent link="garra_base_1"/>
-  <child link="garra_cima_1"/>
-</joint>
-
-<joint name="garra_engrenagem2_to_garra_cima" type="continuous">
-  <origin xyz="0.0 0.0 0.01" rpy="0 0 0"/>
-  <parent link="garra_cima_1"/>
-  <child link="garra_engrenagem2_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra_braco2_to_garra_base" type="continuous">
-  <origin xyz="0.005 0.02 0.01" rpy="0 0 0"/>
-  <parent link="garra_cima_1"/>
-  <child link="garra_braco2_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra_engrenagem1_to_garra_cima" type="continuous">
-  <origin xyz="0.025 0.0 0.01" rpy="0 0 0"/>
-  <parent link="garra_cima_1"/>
-  <child link="garra_engrenagem1_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra_braco1_to_garra_cima" type="continuous">
-  <origin xyz="0.02 0.02 0.01" rpy="0 0 0"/>
-  <parent link="garra_cima_1"/>
-  <child link="garra_braco1_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra2_to_garra_engrenagem2" type="continuous">
-  <origin xyz="-0.023284 0.048284 -0.0035" rpy="0 0 0"/>
-  <parent link="garra_engrenagem2_1"/>
-  <child link="garra2_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra2_to_garra_braco2" type="continuous">
-  <origin xyz="-0.028284 0.028284 -0.0035" rpy="0 0 0"/>
-  <parent link="garra_braco2_1"/>
-  <child link="garra2_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra1_to_garra_engrenagem1" type="continuous">
-  <origin xyz="0.023284 0.048284 -0.0035" rpy="0 0 0"/>
-  <parent link="garra_engrenagem1_1"/>
-  <child link="garra1_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="garra1_to_garra_braco1" type="continuous">
-  <origin xyz="0.028284 0.028284 -0.0035" rpy="0 0 0"/>
-  <parent link="garra_braco1_1"/>
-  <child link="garra1_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
+  <child link="garra_direita_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit upper="0.025" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
 </robot>

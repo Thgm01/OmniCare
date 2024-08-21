@@ -45,100 +45,34 @@
   </actuator>
 </transmission>
 
-<transmission name="garra_base_to_braco3_tran">
+<transmission name="garra_base_to braco3_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra_base_to_braco3">
+  <joint name="garra_base_to braco3">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="garra_base_to_braco3_actr">
+  <actuator name="garra_base_to braco3_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="garra_engrenagem2_to_garra_cima_tran">
+<transmission name="garra_esquerda_to_garra_base_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra_engrenagem2_to_garra_cima">
+  <joint name="garra_esquerda_to_garra_base">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="garra_engrenagem2_to_garra_cima_actr">
+  <actuator name="garra_esquerda_to_garra_base_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="garra_braco2_to_garra_base_tran">
+<transmission name="garra_direita_to_garra_base_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra_braco2_to_garra_base">
+  <joint name="garra_direita_to_garra_base">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="garra_braco2_to_garra_base_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra_engrenagem1_to_garra_cima_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra_engrenagem1_to_garra_cima">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra_engrenagem1_to_garra_cima_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra_braco1_to_garra_cima_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra_braco1_to_garra_cima">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra_braco1_to_garra_cima_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra2_to_garra_engrenagem2_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra2_to_garra_engrenagem2">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra2_to_garra_engrenagem2_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra2_to_garra_braco2_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra2_to_garra_braco2">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra2_to_garra_braco2_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra1_to_garra_engrenagem1_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra1_to_garra_engrenagem1">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra1_to_garra_engrenagem1_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-<transmission name="garra1_to_garra_braco1_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="garra1_to_garra_braco1">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="garra1_to_garra_braco1_actr">
+  <actuator name="garra_direita_to_garra_base_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
