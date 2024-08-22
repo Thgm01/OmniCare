@@ -6,5 +6,4 @@ initial_positions:
   braco2_to_braco1: 0
   braco3_to_braco2: 0
   garra_base_to braco3: 0
-  garra_direita_to_garra_base: 0
   garra_esquerda_to_garra_base: 0

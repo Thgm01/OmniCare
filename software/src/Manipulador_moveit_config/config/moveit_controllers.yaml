@@ -15,5 +15,6 @@ moveit_simple_controller_manager:
       - braco1_to_base_cima
       - braco2_to_braco1
       - braco3_to_braco2
+      - garra_base_to braco3
     action_ns: follow_joint_trajectory
     default: true
