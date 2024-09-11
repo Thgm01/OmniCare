@@ -11,9 +11,9 @@ from launch.actions import DeclareLaunchArgument, ExecuteProcess, SetEnvironment
 def generate_launch_description():
 
     simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/simulation.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('base_description'), '/launch/gazebo.launch.py']),
            launch_arguments={
-                'world_path': [get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+                'world_path': [get_package_share_directory('base_description'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
             }.items(),
     )
 
@@ -24,14 +24,14 @@ def generate_launch_description():
     #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load_turtlebot.launch.py']),
     # )
 
-    load_robot = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load.launch.py']),
-        launch_arguments={
-            'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/rviz/navigation.rviz'],
-        }.items()
+    # load_robot = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load.launch.py']),
+    #     launch_arguments={
+    #         'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/display.rviz'],
+    #     }.items()
 
         
-    )
+    # )
 
 
 # -----------------------------------------------------
@@ -68,7 +68,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(simulation)
-    ld.add_action(load_robot)
+    # ld.add_action(load_robot)
     ld.add_action(bringup_cmd)
     ld.add_action(checkpoint)
 
