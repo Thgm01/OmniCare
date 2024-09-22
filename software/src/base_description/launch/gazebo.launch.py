@@ -1,7 +1,7 @@
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 import os
@@ -15,12 +15,6 @@ def generate_launch_description():
     xacro_file = os.path.join(share_dir, 'urdf', 'Base.xacro')
     robot_description_config = xacro.process_file(xacro_file)
     robot_urdf = robot_description_config.toxml()
-
-    world_path = DeclareLaunchArgument(
-        name='world_path', 
-        default_value='', 
-        description=''
-    )
     
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace',
@@ -42,29 +36,30 @@ def generate_launch_description():
         name='joint_state_publisher'
     )
 
-    gazebo_server = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
-                'launch',
-                'gzserver.launch.py'
-            ])
-        ]),
-        launch_arguments={
-            'pause': 'false',
-            'world': LaunchConfiguration('world_path')
-        }.items()
+    gz_model_path = SetEnvironmentVariable(
+        name='GAZEBO_MODEL_PATH',
+        value=['/home/robot/gazebo_models:',get_package_share_directory('base_description'),'/simulation/models:/opt/ros/humble/share/turtlebot3_gazebo/models']
     )
 
-    gazebo_client = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
-                'launch',
-                'gzclient.launch.py'
-            ])
-        ])
+
+    world_path = DeclareLaunchArgument(
+        name='world_path', 
+        default_value='', 
+        description=''
     )
+
+    gzserver = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([get_package_share_directory('gazebo_ros'), '/launch/gzserver.launch.py']),
+            launch_arguments = {
+                'verbose': 'false',
+                'world': LaunchConfiguration('world_path')
+            }.items()
+        )
+
+    gzclient = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([get_package_share_directory('gazebo_ros'), '/launch/gzclient.launch.py']),
+            # condition=IfCondition(LaunchConfiguration('simulation_gui'))
+        )
 
     urdf_spawn_node = Node(
         package='gazebo_ros',
@@ -77,11 +72,12 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        gz_model_path,
         world_path,
         declare_namespace_cmd,
         robot_state_publisher_node,
         joint_state_publisher_node,
-        gazebo_server,
-        gazebo_client,
+        gzserver,
+        gzclient,
         urdf_spawn_node,
     ])
