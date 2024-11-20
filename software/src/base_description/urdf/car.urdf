@@ -686,7 +686,7 @@
 
   <gazebo reference="lidar_link">
     <sensor type="ray" name="head_hokuyo_sensor">
-        <visualize> </visualize>
+        <visualize>false</visualize>
         <updateRate>30</updateRate>
         <ray>
             <scan>
