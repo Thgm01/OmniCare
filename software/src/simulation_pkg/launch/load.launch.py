@@ -20,7 +20,7 @@ def generate_launch_description():
     urdf_path = get_package_share_path('base_description')
     rviz_path = get_package_share_path('simulation_pkg')
 
-    default_model_path = urdf_path / 'urdf/car.urdf'
+    default_model_path = urdf_path / 'urdf/Base.xacro'
     # default_model_path = urdf_tutorial_path / 'urdf/sam_bot_description.urdf'
     default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
 
