@@ -18,6 +18,7 @@ class Checkpoints(Node):
         self.declare_parameter('checkpoints_file', '')
 
     def start_callback(self, request, response):
+        self.get_logger().info ('Entrando no loop princial do nó.')
 
         try:
             checkpoints_file = self.get_parameter('checkpoints_file').get_parameter_value().string_value

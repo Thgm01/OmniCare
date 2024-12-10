@@ -41,7 +41,7 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="/home/llagoeiro/Desktop/aprendendo_ros2/src/pacote_de_exemplos/meshes/cute_cube.dae" scale="0.256 0.150 0.065"/>
+        <mesh filename="src/base_description/meshes/cute_cube.dae" scale="0.256 0.150 0.065"/>
       </geometry>
       <material name="box_bot_blue"/>
     </visual>
@@ -598,7 +598,7 @@
 
     <visual>
       <geometry>
-        <mesh filename="/home/llagoeiro/Desktop/aprendendo_ros2/src/pacote_de_exemplos/meshes/sensors/rplidar.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="src/base_description/meshes/sensors/rplidar.dae" scale="1.0 1.0 1.0"/>
       </geometry>
       <material name="black"/>
     </visual>

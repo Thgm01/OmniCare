@@ -41,7 +41,8 @@ setup(
             'no_simples = simulation_pkg.no_simples:main',
             'no_com_classe = simulation_pkg.no_com_classe:main',
             'checkpoints = simulation_pkg.checkpoints:main',
-            'r2d2 = simulation_pkg.r2d2:main'
+            'r2d2 = simulation_pkg.r2d2:main',
+            'robot = simulation_pkg.robot:main'
         ],
     },
 )

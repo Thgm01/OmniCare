@@ -17,10 +17,12 @@ def generate_launch_description():
         default_value='',
         description='Top-level namespace')
 
-    urdf_tutorial_path = get_package_share_path('simulation_pkg')
-    default_model_path = urdf_tutorial_path / 'urdf/myfirstrobot.urdf.xacro'
+    urdf_path = get_package_share_path('base_description')
+    rviz_path = get_package_share_path('simulation_pkg')
+
+    default_model_path = urdf_path / 'urdf/car.urdf'
     # default_model_path = urdf_tutorial_path / 'urdf/sam_bot_description.urdf'
-    default_rviz_config_path = urdf_tutorial_path / 'config/rviz/robot.rviz'
+    default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')

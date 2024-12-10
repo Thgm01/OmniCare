@@ -24,14 +24,14 @@ def generate_launch_description():
     #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load_turtlebot.launch.py']),
     # )
 
-    # load_robot = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load.launch.py']),
-    #     launch_arguments={
-    #         'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/display.rviz'],
-    #     }.items()
+    load_robot = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load.launch.py']),
+        launch_arguments={
+            'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/rviz/navigation.rviz'],
+        }.items()
 
         
-    # )
+    )
 
 
 # -----------------------------------------------------
@@ -68,8 +68,8 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(simulation)
-    # ld.add_action(load_robot)
+    ld.add_action(load_robot)
     ld.add_action(bringup_cmd)
-    ld.add_action(checkpoint)
+    # ld.add_action(checkpoint)
 
     return ld
