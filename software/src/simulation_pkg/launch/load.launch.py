@@ -1,10 +1,10 @@
 from ament_index_python.packages import get_package_share_path
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, ExecuteProcess,RegisterEventHandler, TimerAction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import Command, LaunchConfiguration
-
+from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
@@ -35,6 +35,14 @@ def generate_launch_description():
 
     robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
                                        value_type=str)
+    
+    controller_params_file = get_package_share_path('base_description') / 'config/omnidirectional_controller.yaml'
+
+    controller_manager = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[{'robot_description': robot_description}, controller_params_file]
+    )
 
     log_level = DeclareLaunchArgument(
         name='log_level', 
@@ -114,6 +122,33 @@ def generate_launch_description():
             '--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
+
+    omni_base_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["omnidirectional_controller"],
+    )
+
+    omni_base_controller_event_handler = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[omni_base_controller_spawner]
+        )
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"],
+    )
+
+    joint_state_broadcaster_event_handler = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[joint_state_broadcaster_spawner]
+        )
+    )
+
     # robot_localization_node = Node(
     #      package='robot_localization',
     #      executable='ekf_node',
@@ -138,5 +173,7 @@ def generate_launch_description():
         spawn_entity,
         # robot_localization_node,
         rviz_node,
+        # omni_base_controller_spawner,
+        # joint_state_broadcaster_spawner
         # teleop
     ])
