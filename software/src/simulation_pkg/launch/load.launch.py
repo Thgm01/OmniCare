@@ -66,6 +66,31 @@ def generate_launch_description():
         arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        condition=UnlessCondition(LaunchConfiguration('gui')),
+        output='log',
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }],
+        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"],
+    )
+
+    omni_base_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["omnidirectional_controller"],
+    )
+
+
+
     # # Depending on gui parameter, either launch joint_state_publisher or joint_state_publisher_gui
     # joint_state_publisher_node = Node(
     #     package='joint_state_publisher',
@@ -123,31 +148,31 @@ def generate_launch_description():
     )
 
 
-    omni_base_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["omnidirectional_controller"],
-    )
+    # omni_base_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["omnidirectional_controller"],
+    # )
 
-    omni_base_controller_event_handler = RegisterEventHandler(
-        event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[omni_base_controller_spawner]
-        )
-    )
+    # omni_base_controller_event_handler = RegisterEventHandler(
+    #     event_handler=OnProcessStart(
+    #         target_action=controller_manager,
+    #         on_start=[omni_base_controller_spawner]
+    #     )
+    # )
 
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-    )
+    # joint_state_broadcaster_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["joint_state_broadcaster"],
+    # )
 
-    joint_state_broadcaster_event_handler = RegisterEventHandler(
-        event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[joint_state_broadcaster_spawner]
-        )
-    )
+    # joint_state_broadcaster_event_handler = RegisterEventHandler(
+    #     event_handler=OnProcessStart(
+    #         target_action=controller_manager,
+    #         on_start=[joint_state_broadcaster_spawner]
+    #     )
+    # )
 
     # robot_localization_node = Node(
     #      package='robot_localization',
@@ -167,13 +192,13 @@ def generate_launch_description():
         model_arg,
         rviz_arg,
         use_sim_time_arg,
-        # joint_state_publisher_node,
+        joint_state_publisher_node,
         # joint_state_publisher_gui_node,
         robot_state_publisher_node,
         spawn_entity,
         # robot_localization_node,
         rviz_node,
-        # omni_base_controller_spawner,
-        # joint_state_broadcaster_spawner
+        omni_base_controller_spawner,
+        joint_state_broadcaster_spawner
         # teleop
     ])

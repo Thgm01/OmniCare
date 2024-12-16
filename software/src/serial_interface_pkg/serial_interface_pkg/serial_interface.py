@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 import serial
 
-from std_msgs.msg import Int32
+from std_msgs.msg import Int32MultiArray
 
 
 class InterfacePublisher(Node):
@@ -10,15 +10,15 @@ class InterfacePublisher(Node):
     def __init__(self):
         super().__init__('interface_publisher')
         
-        self.usb_port = "/dev/ttyUSB0"  # Substitua pelo nome da sua porta USB
+        self.usb_port = "/dev/ttyACM1"  # Substitua pelo nome da sua porta USB
         self.baud_rate = 115200           # Taxa de comunicação
 
-        self.publisher_ = self.create_publisher(Int32, 'value', 10)
+        self.publisher_ = self.create_publisher(Int32MultiArray, 'value', 10)
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
-        msg = Int32()
+        msg = Int32MultiArray()
 
         try:
             # Inicializa a conexão serial
@@ -27,13 +27,14 @@ class InterfacePublisher(Node):
                 print("Pressione Ctrl+C para sair.\n")
 
                 while rclpy.ok():
+                    # 
+                    ser.write(1)
                     # Lê uma linha de dados da USB
-                    raw_data = ser.read(1)  # Lê como bytes
-                    if raw_data:
-                        # Interpreta como hexadecimal
-                        hex_data = raw_data.hex()  # Dados como hexadecimal
-                        decimal_values = int(hex_data, 16)
-                        print(f"Dado recebido (hex): {hex_data}")
+                    raw_data = ser.read(3)  # Lê 3 bytes enviados pelo STM32
+                    if len(raw_data) == 3:
+                        # Interpreta como decimais
+                        decimal_values = [int(b) for b in raw_data]
+                        print(f"Dado recebido (bin): {raw_data}")
                         print(f"Dado convertido (dec): {decimal_values}")
                         
                         # Enviando de volta o valor
