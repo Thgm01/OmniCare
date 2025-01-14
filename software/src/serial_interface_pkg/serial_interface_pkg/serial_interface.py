@@ -10,11 +10,11 @@ class InterfacePublisher(Node):
     def __init__(self):
         super().__init__('interface_publisher')
         
-        self.usb_port = "/dev/ttyACM1"  # Substitua pelo nome da sua porta USB
+        self.usb_port = "/dev/ttyACM0"  # Substitua pelo nome da sua porta USB
         self.baud_rate = 115200           # Taxa de comunicação
 
         self.publisher_ = self.create_publisher(Int32MultiArray, 'value', 10)
-        timer_period = 0.5  # seconds
+        timer_period = 0.01  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
@@ -34,7 +34,7 @@ class InterfacePublisher(Node):
                     if len(raw_data) == 3:
                         # Interpreta como decimais
                         decimal_values = [int(b) for b in raw_data]
-                        print(f"Dado recebido (bin): {raw_data}")
+                        # print(f"Dado recebido (bin): {raw_data}")
                         print(f"Dado convertido (dec): {decimal_values}")
                         
                         # Enviando de volta o valor
