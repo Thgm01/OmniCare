@@ -1,5 +1,12 @@
+# Gerados pelo ROS
 */build
 */install
 */log
+
+# Gerados pelo VS Code 
 */.vscode
 .vscode
+
+# Gerados pelo STM Cube IDE
+**/.metadata
+***/Debug
