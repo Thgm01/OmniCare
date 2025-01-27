@@ -338,3 +338,4 @@ VP_USBX_UX\ Device\ Controller_FS.Signal=USBX_UX Device Controller_FS
 VP_USBX_UX\ Device\ CoreStack_FS.Mode=UX_Device_CoreStack_FS
 VP_USBX_UX\ Device\ CoreStack_FS.Signal=USBX_UX Device CoreStack_FS
 board=custom
+isbadioc=false

@@ -26,6 +26,7 @@
 
 #include "defines.h"
 #include "robot_data.h"
+#include "main.h"
 
 /* USER CODE END Includes */
 
@@ -120,13 +121,38 @@ VOID usbx_cdc_acm_read_thread_entry(ULONG thread_input)
 {
     /* Private Variables */
     ULONG rx_actual_length;
-    uint8_t velocity_rx[3];
+    uint8_t velocity_pwm_rx[3];
     /* Infinite Loop */
     while(1)
     {
 	   if(cdc_acm != UX_NULL)
 	   {
-		   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_rx, 64, &rx_actual_length);
+		   	   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, 64, &rx_actual_length);
+
+
+		   	 TIM5->CCR1 = abs(velocity_pwm_rx[0]);
+			 TIM5->CCR2 = 0;
+			 if(velocity_pwm_rx[0] < 100)
+			 {
+				 TIM5->CCR1 = 0;
+				 TIM5->CCR2 = abs(velocity_pwm_rx[0]);
+			 }
+
+			 TIM5->CCR3 = abs(velocity_pwm_rx[1]);
+			 TIM5->CCR4 = 0;
+			 if(velocity_pwm_rx[1] < 100)
+			 {
+				 TIM5->CCR3 = 0;
+				 TIM5->CCR4 = abs(velocity_pwm_rx[1]);
+			 }
+
+			 TIM15->CCR1 = abs(velocity_pwm_rx[2]);
+			 TIM15->CCR2 = 0;
+			 if(velocity_pwm_rx[2] < 100)
+			 {
+				 TIM15->CCR1 = 0;
+				 TIM15->CCR2 = abs(velocity_pwm_rx[2]);
+			 }
 	   }
     }
 }
@@ -151,7 +177,6 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     	Update_Motors_Data(1, counter_enc1);
     	Update_Motors_Data(2, counter_enc2);
     	Update_Motors_Data(3, counter_enc3);
-
 
     	encoder_message[0] = motors_data[1].velocity_rpm;
     	encoder_message[1] = motors_data[1].position_m;

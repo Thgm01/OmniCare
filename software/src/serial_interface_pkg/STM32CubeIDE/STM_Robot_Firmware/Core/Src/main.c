@@ -149,17 +149,13 @@ int main(void)
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
 
 
-  TIM5->CCR1 = 255;
-  TIM5->CCR2 = 255;
-  TIM5->CCR3 = 255;
-  TIM5->CCR4 = 255;
-
+//  TIM5->CCR1 = 255;
+//  TIM5->CCR2 = 255;
+//  TIM5->CCR3 = 255;
+//  TIM5->CCR4 = 255;
+//
 //  TIM15->CCR1 = 120;
 //  TIM15->CCR2 = 120;
-
-
-
-
 
   HAL_TIM_Encoder_Start_IT(encoders[1], TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start_IT(encoders[2], TIM_CHANNEL_ALL);
@@ -644,7 +640,6 @@ void MX_USB_DRD_FS_PCD_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
@@ -652,16 +647,6 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PA5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

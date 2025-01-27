@@ -29,7 +29,7 @@ class InterfacePublisher(Node):
 
                 while rclpy.ok():
                     # 
-                    ser.write(1)
+                    ser.write([256, 99, 99])
                     # Lê uma linha de dados da USB
                     raw_data = ser.read(24)  # Lê 3 bytes enviados pelo STM32
                     # raw_data = ser.readline()  # Lê 3 bytes enviados pelo STM32
