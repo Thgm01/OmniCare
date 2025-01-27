@@ -8,6 +8,7 @@
 #include "robot_data.h"
 #include "defines.h"
 
+// mudar encoder 1 comentarios
 /* PINOS ENCODERS 1
  * PRETO  : GND
  * CINZA  : CHANEL A (A0)
