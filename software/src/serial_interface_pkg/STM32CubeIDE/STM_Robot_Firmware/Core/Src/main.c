@@ -24,7 +24,9 @@
 /* USER CODE BEGIN Includes */
 
 #include "defines.h"
+#include "pin_mapping.h"
 #include "robot_data.h"
+
 
 /* USER CODE END Includes */
 
@@ -55,7 +57,7 @@ PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
 
-TIM_HandleTypeDef *encoders[4] = {NULL, &htim2, &htim3, &htim4};
+Motors motors_data[3];
 
 /* USER CODE END PV */
 
@@ -76,24 +78,19 @@ static void MX_TIM15_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-int32_t counter_enc1 = 0;
-int32_t counter_enc2 = 0;
-int32_t counter_enc3 = 0;
-
-
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim == &htim2)
+	if(htim == ENCODER_0)
 	{
-		counter_enc1 = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[0].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
 	}
-	else if (htim == &htim3)
+	else if (htim == ENCODER_1)
 	{
-		counter_enc2 = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[1].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
 	}
 	else
 	{
-		counter_enc3 = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[2].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
 	}
 }
 
@@ -141,6 +138,10 @@ int main(void)
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
 
+	HAL_TIM_Encoder_Start_IT(ENCODER_0, TIM_CHANNEL_ALL);
+	HAL_TIM_Encoder_Start_IT(ENCODER_1, TIM_CHANNEL_ALL);
+	HAL_TIM_Encoder_Start_IT(ENCODER_2, TIM_CHANNEL_ALL);
+
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_3);
@@ -148,18 +149,16 @@ int main(void)
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
 
-
-//  TIM5->CCR1 = 255;
-//  TIM5->CCR2 = 255;
-//  TIM5->CCR3 = 255;
-//  TIM5->CCR4 = 255;
+  //TODO remover essa parte depois que acabar de configurar a comunicacao serial
+  TIM5->CCR1 = 255;
+  TIM5->CCR2 = 255;
+  TIM5->CCR3 = 255;
+  TIM5->CCR4 = 255;
 //
-//  TIM15->CCR1 = 120;
-//  TIM15->CCR2 = 120;
+  TIM15->CCR1 = 255;
+  TIM15->CCR2 = 255;
 
-  HAL_TIM_Encoder_Start_IT(encoders[1], TIM_CHANNEL_ALL);
-  HAL_TIM_Encoder_Start_IT(encoders[2], TIM_CHANNEL_ALL);
-  HAL_TIM_Encoder_Start_IT(encoders[3], TIM_CHANNEL_ALL);
+
 
   /* USER CODE END 2 */
 

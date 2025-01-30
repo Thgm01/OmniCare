@@ -26,7 +26,6 @@
 
 #include "defines.h"
 #include "robot_data.h"
-#include "main.h"
 
 /* USER CODE END Includes */
 
@@ -49,8 +48,6 @@
 /* USER CODE BEGIN PV */
 
 UX_SLAVE_CLASS_CDC_ACM  *cdc_acm;
-
-extern Motors motors_data[4];
 
 /* USER CODE END PV */
 
@@ -121,45 +118,20 @@ VOID usbx_cdc_acm_read_thread_entry(ULONG thread_input)
 {
     /* Private Variables */
     ULONG rx_actual_length;
-    uint8_t velocity_pwm_rx[3];
+    int16_t velocity_pwm_rx[3];
     /* Infinite Loop */
     while(1)
     {
 	   if(cdc_acm != UX_NULL)
 	   {
-		   	   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, 64, &rx_actual_length);
+		   	   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
 
-
-		   	 TIM5->CCR1 = abs(velocity_pwm_rx[0]);
-			 TIM5->CCR2 = 0;
-			 if(velocity_pwm_rx[0] < 100)
-			 {
-				 TIM5->CCR1 = 0;
-				 TIM5->CCR2 = abs(velocity_pwm_rx[0]);
-			 }
-
-			 TIM5->CCR3 = abs(velocity_pwm_rx[1]);
-			 TIM5->CCR4 = 0;
-			 if(velocity_pwm_rx[1] < 100)
-			 {
-				 TIM5->CCR3 = 0;
-				 TIM5->CCR4 = abs(velocity_pwm_rx[1]);
-			 }
-
-			 TIM15->CCR1 = abs(velocity_pwm_rx[2]);
-			 TIM15->CCR2 = 0;
-			 if(velocity_pwm_rx[2] < 100)
-			 {
-				 TIM15->CCR1 = 0;
-				 TIM15->CCR2 = abs(velocity_pwm_rx[2]);
-			 }
+		   	if (rx_actual_length == sizeof(velocity_pwm_rx)) {
+		   		set_motors_velocity(velocity_pwm_rx);
+		   	}
 	   }
     }
 }
-
-extern int32_t counter_enc1;
-extern int32_t counter_enc2;
-extern int32_t counter_enc3;
 
 float encoder_message[6];
 
@@ -174,18 +146,17 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     ULONG tx_actual_length;
     while(1)
     {
-    	Update_Motors_Data(1, counter_enc1);
-    	Update_Motors_Data(2, counter_enc2);
-    	Update_Motors_Data(3, counter_enc3);
+    	update_all_motors_data();
 
-    	encoder_message[0] = motors_data[1].velocity_rpm;
-    	encoder_message[1] = motors_data[1].position_m;
-    	encoder_message[2] = motors_data[2].velocity_rpm;
-    	encoder_message[3] = motors_data[2].position_m;
-    	encoder_message[4] = motors_data[3].velocity_rpm;
-    	encoder_message[5] = motors_data[3].position_m;
+    	encoder_message[0] = motors_data[0].velocity_rpm;
+    	encoder_message[1] = motors_data[0].position_m;
+    	encoder_message[2] = motors_data[1].velocity_rpm;
+    	encoder_message[3] = motors_data[1].position_m;
+    	encoder_message[4] = motors_data[2].velocity_rpm;
+    	encoder_message[5] = motors_data[2].position_m;
 
 		ux_device_class_cdc_acm_write(cdc_acm, (UCHAR *)(encoder_message), sizeof(encoder_message), &tx_actual_length);
+
 		tx_thread_sleep(SPEED_READ_INTERVAL_MS);
     }
 

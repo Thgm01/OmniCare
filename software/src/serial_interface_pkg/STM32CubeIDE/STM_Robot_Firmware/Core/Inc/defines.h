@@ -16,4 +16,6 @@
 
 #define WHEEL_RADIUS_MM 60
 
+extern const int ENCODERS_DIRECTION[];
+
 #endif /* INC_DEFINES_H_ */
