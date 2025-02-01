@@ -1,0 +1,13 @@
+{
+    "configuration": "default",
+    "documentId": "10bb8f638519612f779f819f",
+    "documentMicroversion": "e918befa1de2957cb85c512d",
+    "elementId": "5e4d67ed3a08b1dfd9c7821b",
+    "fullConfiguration": "default",
+    "id": "MVtMu8ScQ8CT2O1js",
+    "isStandardContent": false,
+    "name": "IMU <1>",
+    "partId": "JKD",
+    "suppressed": false,
+    "type": "Part"
+}
