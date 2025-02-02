@@ -66,16 +66,16 @@ def generate_launch_description():
         arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
-    # joint_state_publisher_node = Node(
-    #     package='joint_state_publisher',
-    #     executable='joint_state_publisher',
-    #     condition=UnlessCondition(LaunchConfiguration('gui')),
-    #     output='log',
-    #     parameters=[{
-    #         'use_sim_time': LaunchConfiguration('use_sim_time')
-    #     }],
-    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
-    # )
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        condition=UnlessCondition(LaunchConfiguration('gui')),
+        output='log',
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }],
+        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+    )
 
     # controller_manager = Node(
     #     package="controller_manager",
