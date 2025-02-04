@@ -8,6 +8,8 @@ from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
+import xacro
+import os
 
 
 def generate_launch_description():
@@ -17,12 +19,10 @@ def generate_launch_description():
         default_value='',
         description='Top-level namespace')
 
-    urdf_path = get_package_share_path('base_description')
-    rviz_path = get_package_share_path('simulation_pkg')
+    urdf_tutorial_path = get_package_share_path('simulation_pkg')
 
-    default_model_path = urdf_path / 'urdf/Base.xacro'
-    # default_model_path = urdf_tutorial_path / 'urdf/sam_bot_description.urdf'
-    default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
+    default_model_path = urdf_tutorial_path / 'urdf/robot.xacro'
+    default_rviz_config_path = urdf_tutorial_path / 'config/rviz/robot.rviz'
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
@@ -30,19 +30,19 @@ def generate_launch_description():
                                       description='Absolute path to robot urdf file')
     rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=str(default_rviz_config_path),
                                      description='Absolute path to rviz config file')
-    use_sim_time_arg = DeclareLaunchArgument(name='use_sim_time', default_value='true',
+    use_sim_time_arg = DeclareLaunchArgument(name='use_sim_time', default_value='false',
                                             description='Flag to enable use_sim_time')
 
-    robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
-                                       value_type=str)
-    
-    controller_params_file = get_package_share_path('base_description') / 'config/omnidirectional_controller.yaml'
 
-    controller_manager = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[{'robot_description': robot_description}, controller_params_file]
-    )
+    xacro_file = os.path.join(urdf_tutorial_path, 'urdf', 'robot.xacro')
+    robot_description_config = xacro.process_file(xacro_file)
+    robot_urdf = robot_description_config.toxml()
+
+    
+    # robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
+    #                                    value_type=str)
+    # controller_params_file = get_package_share_path('base_description') / 'config/omnidirectional_controller.yaml'
+
 
     log_level = DeclareLaunchArgument(
         name='log_level', 
@@ -57,7 +57,7 @@ def generate_launch_description():
         output='log',
         parameters=[{
             'use_sim_time': LaunchConfiguration('use_sim_time'), 
-            'robot_description': robot_description
+            'robot_description': robot_urdf
         }],
         remappings=[
             ('/tf', 'tf'),
@@ -77,41 +77,39 @@ def generate_launch_description():
         arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-    )
-
-    omni_base_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["omnidirectional_controller"],
-    )
-
-
-
-    # # Depending on gui parameter, either launch joint_state_publisher or joint_state_publisher_gui
-    # joint_state_publisher_node = Node(
-    #     package='joint_state_publisher',
-    #     executable='joint_state_publisher',
-    #     condition=UnlessCondition(LaunchConfiguration('gui')),
-    #     output='log',
-    #     parameters=[{
-    #         'use_sim_time': LaunchConfiguration('use_sim_time')
-    #     }],
-    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+    # controller_manager = Node(
+    #     package="controller_manager",
+    #     executable="ros2_control_node",
+    #     parameters=[{'robot_description': robot_description}, controller_params_file]
     # )
 
-    # joint_state_publisher_gui_node = Node(
-    #     package='joint_state_publisher_gui',
-    #     executable='joint_state_publisher_gui',
-    #     output='log',
-    #     condition=IfCondition(LaunchConfiguration('gui')),
-    #     parameters=[{
-    #         'use_sim_time': LaunchConfiguration('use_sim_time')
-    #     }],
-    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+    # delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
+
+    # omni_base_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["omnidirectional_controller"],
+    # )
+
+
+    # delayed_omni_drive_spawner = RegisterEventHandler(
+    #     event_handler=OnProcessStart(
+    #         target_action=controller_manager,
+    #         on_start=[omni_base_controller_spawner],
+    #     )
+    # )
+
+    # joint_state_broadcaster_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["joint_state_broadcaster"],
+    # )
+
+    # delayed_joint_broad_spawner = RegisterEventHandler(
+    #     event_handler=OnProcessStart(
+    #         target_action=controller_manager,
+    #         on_start=[joint_state_broadcaster_spawner],
+    #     )
     # )
 
     rviz_node = Node(
@@ -147,43 +145,6 @@ def generate_launch_description():
             '--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
-
-    # omni_base_controller_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=["omnidirectional_controller"],
-    # )
-
-    # omni_base_controller_event_handler = RegisterEventHandler(
-    #     event_handler=OnProcessStart(
-    #         target_action=controller_manager,
-    #         on_start=[omni_base_controller_spawner]
-    #     )
-    # )
-
-    # joint_state_broadcaster_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=["joint_state_broadcaster"],
-    # )
-
-    # joint_state_broadcaster_event_handler = RegisterEventHandler(
-    #     event_handler=OnProcessStart(
-    #         target_action=controller_manager,
-    #         on_start=[joint_state_broadcaster_spawner]
-    #     )
-    # )
-
-    # robot_localization_node = Node(
-    #      package='robot_localization',
-    #      executable='ekf_node',
-    #      name='ekf_filter_node',
-    #      parameters=[
-    #          [get_package_share_directory('gazebo'), '/config/nav/ekf.yaml'], 
-    #          {'use_sim_time': LaunchConfiguration('use_sim_time')}
-    #     ],
-    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
-    # )
     
     return LaunchDescription([
         declare_namespace_cmd,
@@ -192,13 +153,16 @@ def generate_launch_description():
         model_arg,
         rviz_arg,
         use_sim_time_arg,
-        joint_state_publisher_node,
+        # joint_state_publisher_node,
         # joint_state_publisher_gui_node,
         robot_state_publisher_node,
+        # delayed_controller_manager,
+        # delayed_omni_drive_spawner,
+        # delayed_joint_broad_spawner,
+        
         spawn_entity,
         # robot_localization_node,
-        rviz_node,
-        omni_base_controller_spawner,
-        joint_state_broadcaster_spawner
+
+        rviz_node
         # teleop
     ])

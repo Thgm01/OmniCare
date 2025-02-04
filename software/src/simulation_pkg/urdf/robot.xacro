@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find simulation_pkg)/urdf/robot.gazebo" />
+
+
+    <!-- root link, on the ground just below the model origin -->
+    <link name="base_footprint">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="base_link_joint" type="fixed">
+        <origin xyz="0.0 0 0.105" rpy="0 0 0" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+    </joint>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0.040970128253102346128 0.042066415995359325575 0.12400000000000016565"
+                rpy="3.141592653589793116 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/part_1.stl" />
+            </geometry>
+            <material name="part_1_material">
+                <color
+                    rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.040970128253102346128 0.042066415995359325575 0.12400000000000016565"
+                rpy="3.141592653589793116 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/part_1.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.038431848347187068382 -0.013246810296550448616 0.098000000000000142553"
+                rpy="0 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/part_2.stl" />
+            </geometry>
+            <material name="part_2_material">
+                <color
+                    rgba="0.64705882352941179736 0.64705882352941179736 0.64705882352941179736 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.038431848347187068382 -0.013246810296550448616 0.098000000000000142553"
+                rpy="0 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/part_2.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="-0.17959202910435595468 -0.10368750634771083108 -0.010000000000000000208"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+            <material name="perfil_motores_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.17959202910435595468 -0.10368750634771083108 -0.010000000000000000208"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.13429890048642967315 -0.07753750634771117145 -0.043642622765278749064"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+            <material name="motor_material">
+                <color rgba="0.7568627450980391913 0.6745098039215686736 0.5803921568627451455 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.13429890048642967315 -0.07753750634771117145 -0.043642622765278749064"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="-0.17352985127786493824 -0.1001875063477108696 0.0060000000000000001249"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+            <material name="perfil_colunas_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.17352985127786493824 -0.1001875063477108696 0.0060000000000000001249"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/mdf_motores.stl" />
+            </geometry>
+            <material name="mdf_motores_material">
+                <color
+                    rgba="0.90196078431372550543 0.83529411764705885357 0.6745098039215686736 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/mdf_motores.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="-0.13429890048642978417 -0.077537506347710782872 -0.043642622765278749064"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+            <material name="motor_material">
+                <color rgba="0.7568627450980391913 0.6745098039215686736 0.5803921568627451455 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.13429890048642978417 -0.077537506347710782872 -0.043642622765278749064"
+                rpy="0 -0 -1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.17959202910435578815 -0.10368750634771116415 -0.010000000000000000208"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+            <material name="perfil_motores_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.17959202910435578815 -0.10368750634771116415 -0.010000000000000000208"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="2.498001805406602216e-16 0.20037501269542196125 0.0060000000000000001249"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+            <material name="perfil_colunas_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="2.498001805406602216e-16 0.20037501269542196125 0.0060000000000000001249"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="2.7755575615628913511e-16 0.20737501269542196747 -0.010000000000000000208"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+            <material name="perfil_motores_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="2.7755575615628913511e-16 0.20737501269542196747 -0.010000000000000000208"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_motores.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin
+                xyz="2.7755575615628913511e-17 -6.9388939039072283776e-17 0.10300000000000014699"
+                rpy="0 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/mdf_motores.stl" />
+            </geometry>
+            <material name="mdf_motores_material">
+                <color
+                    rgba="0.90196078431372550543 0.83529411764705885357 0.6745098039215686736 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin
+                xyz="2.7755575615628913511e-17 -6.9388939039072283776e-17 0.10300000000000014699"
+                rpy="0 -0 2.7755575615628913511e-16" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/mdf_motores.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="2.9143354396410359186e-16 0.15507501269542195432 -0.04364262276527871437"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+            <material name="motor_material">
+                <color rgba="0.7568627450980391913 0.6745098039215686736 0.5803921568627451455 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="2.9143354396410359186e-16 0.15507501269542195432 -0.04364262276527871437"
+                rpy="0 -0 3.141592653589793116" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/motor.stl" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.17352985127786474395 -0.10018750634771117491 0.0060000000000000001249"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+            <material name="perfil_colunas_material">
+                <color
+                    rgba="0.90196078431372550543 0.90196078431372550543 0.90196078431372550543 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.17352985127786474395 -0.10018750634771117491 0.0060000000000000001249"
+                rpy="0 -0 1.0471975511965976313" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/perfil_colunas.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="2.904943988343017289e-17 -1.8674639925062256642e-17 0.12540826286054423955"
+                rpy="0 0 0" />
+            <mass value="6.6882194661600005148" />
+            <inertia ixx="0.4438090748498306759" ixy="-1.0408340855860842566e-17"
+                ixz="1.3877787807814456755e-17" iyy="0.4438090748498306759"
+                iyz="3.4694469519536141888e-18" izz="0.21703486356250170641" />
+        </inertial>
+    </link>
+
+    <link name="roda">
+        <visual>
+            <origin
+                xyz="1.447310149194805253e-17 6.9388939039072283776e-18 -0.019000000000000016875"
+                rpy="1.570796326794896558 -4.0636983087920363798e-17 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+            <material name="roda_material">
+                <color
+                    rgba="0.30196078431372547213 0.30196078431372547213 0.30196078431372547213 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin
+                xyz="1.447310149194805253e-17 6.9388939039072283776e-18 -0.019000000000000016875"
+                rpy="1.570796326794896558 -4.0636983087920363798e-17 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="1.4471921102810890316e-17 2.0994022695976859463e-18 -0.018457929616132112"
+                rpy="0 0 0" />
+            <mass value="0.28213445289600003196" />
+            <inertia ixx="0.00028668585825496428711" ixy="0" ixz="4.238223762553882937e-21"
+                iyy="0.00028668585825496428711" iyz="0" izz="0.00049830179002104308967" />
+        </inertial>
+    </link>
+
+    <joint name="wheel1_speed" type="continuous">
+        <origin xyz="0.20254170230464341174 -0.11693750634771118979 -0.043642622765278742125"
+            rpy="-1.570796326794896558 -0 1.0471975511965976313" />
+        <parent link="base_link" />
+        <child link="roda" />
+        <axis xyz="0 0 1" />
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0" />
+    </joint>
+
+    <link name="roda_2">
+        <visual>
+            <origin
+                xyz="1.8127225214553025683e-17 6.9388939039072283776e-18 -0.019000000000000016875"
+                rpy="1.570796326794896558 -2.1777293602491688218e-17 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+            <material name="roda_material">
+                <color
+                    rgba="0.30196078431372547213 0.30196078431372547213 0.30196078431372547213 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin
+                xyz="1.8127225214553025683e-17 6.9388939039072283776e-18 -0.019000000000000016875"
+                rpy="1.570796326794896558 -2.1777293602491688218e-17 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="1.8100274740526629763e-17 2.0994022695976859463e-18 -0.018457929616132112"
+                rpy="0 0 0" />
+            <mass value="0.28213445289600003196" />
+            <inertia ixx="0.00028668585825496428711" ixy="0" ixz="-2.4857903690799495105e-20"
+                iyy="0.00028668585825496428711" iyz="0" izz="0.00049830179002104308967" />
+        </inertial>
+    </link>
+
+    <joint name="wheel2_speed" type="continuous">
+        <origin xyz="-0.202541702304643495 -0.1169375063477107457 -0.043642622765278749064"
+            rpy="-1.570796326794896558 -0 -1.0471975511965976313" />
+        <parent link="base_link" />
+        <child link="roda_2" />
+        <axis xyz="0 0 1" />
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0" />
+    </joint>
+
+    <link name="roda_3">
+        <visual>
+            <origin xyz="0 6.9388939039072283776e-18 -0.01899999999999998912"
+                rpy="1.570796326794896558 -0 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+            <material name="roda_material">
+                <color
+                    rgba="0.30196078431372547213 0.30196078431372547213 0.30196078431372547213 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 6.9388939039072283776e-18 -0.01899999999999998912"
+                rpy="1.570796326794896558 -0 0" />
+            <geometry>
+                <mesh filename="file://$(find simulation_pkg)/meshes/stl/roda.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin
+                xyz="6.8824568980111710152e-21 2.0994022695976859463e-18 -0.018457929616132084244"
+                rpy="0 0 0" />
+            <mass value="0.28213445289600003196" />
+            <inertia ixx="0.00028668585825496428711" ixy="0" ixz="0" iyy="0.00028668585825496428711"
+                iyz="0" izz="0.00049830179002104330651" />
+        </inertial>
+    </link>
+
+    <joint name="wheel3_speed" type="continuous">
+        <origin xyz="2.9143354396410359186e-16 0.23387501269542196325 -0.04364262276527871437"
+            rpy="1.570796326794896558 -0 0" />
+        <parent link="base_link" />
+        <child link="roda_3" />
+        <axis xyz="0 0 1" />
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0" />
+    </joint>
+
+
+</robot>
