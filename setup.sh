@@ -59,6 +59,17 @@ fi
 sudo apt update & sudo apt upgrade -y
 sudo apt install zsh curl -y
 
+
+# Instalacao da fonte para usar no terminal
+if [ -z "$(ls -a ~/.local/share | grep fonts)"]; then
+    echo -e "${blue}Instaling Nerd Fonts${NC}"
+    wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip \
+    && cd ~/.local/share/fonts \
+    && unzip JetBrainsMono.zip \
+    && rm JetBrainsMono.zip \
+    && fc-cache -fv
+fi
+
 # Caso já exista não instala o Oh my zsh
 if [ -n "$(ls -a ~/ | grep .oh-my-zsh)" ]; then
     echo "OH-MY-ZSH Já está instalado"
@@ -83,4 +94,41 @@ chsh -s $(which zsh)
 # E inserir a linha abaixo no final do arquivo
 # eval "$(zoxide init zsh)"
 
-# TODO: Incluir como instalar a fonte para o tema do zsh
+#################################################################
+#                    ____   ___  ____ ____                      #
+#                   |  _ \ / _ \/ ___|___ \                     #
+#                   | |_) | | | \___ \ __) |                    #
+#                   |  _ <| |_| |___) / __/                     #
+#                   |_| \_\\___/|____/_____|                    #
+#                                                               #
+#################################################################
+
+
+if [ -z "$(ls -a /opt | grep ros)"]; then
+    echo -e "${blue}Instaling ROS2 Humble${NC}"
+
+    # Instalar o ROS Humble
+    sudo apt install python3-pip
+    sudo apt install software-properties-common -y
+    sudo add-apt-repository universe -y
+    sudo apt update && sudo apt install curl -y
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install ros-humble-desktop -y
+    sudo apt install ros-dev-tools -y
+
+    # Colcon Setup
+    sudo apt install python3-colcon-common-extensions -y
+
+    # Intalar Onshape to Robot
+    pip install onshape-to-robot
+
+    # Source
+    if [[ "$SHELL" == *"zsh"* ]]; then
+        source /opt/ros/humble/setup.zsh
+    else
+        source /opt/ros/humble/setup.bash
+    fi
+
+    echo -e "${green}ROS Installed Successfully${NC}"
