@@ -8,6 +8,7 @@ echo -e "${blue} STARTING JETSON CONFIGURATION ${NC}"
 
 sudo apt update & sudo apt upgrade -y
 
+
 #################################################################
 #                       _                                       #
 #                      / \   _ __  _ __  ___                    #
@@ -47,6 +48,7 @@ if [ -z "$(which code)" ]; then
 else 
     echo -e "${green}VS Code Already Installed${NC}"
 fi
+
 
 #################################################################
 #                                _                              #
@@ -94,6 +96,7 @@ chsh -s $(which zsh)
 # E inserir a linha abaixo no final do arquivo
 # eval "$(zoxide init zsh)"
 
+
 #################################################################
 #                    ____   ___  ____ ____                      #
 #                   |  _ \ / _ \/ ___|___ \                     #
@@ -102,33 +105,51 @@ chsh -s $(which zsh)
 #                   |_| \_\\___/|____/_____|                    #
 #                                                               #
 #################################################################
+    if [ -z "$(ls -a /opt | grep ros)"]; then
+        echo -e "${blue}Instaling ROS2 Humble${NC}"
 
+        # Instalar o ROS Humble
+        sudo apt install python3-pip
+        sudo apt install software-properties-common -y
+        sudo add-apt-repository universe -y
+        sudo apt update && sudo apt install curl -y
+        sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+        sudo apt update && sudo apt upgrade -y
+        sudo apt install ros-humble-desktop -y
+        sudo apt install ros-dev-tools -y
+        sudo apt install python3-rosdep -y
 
-if [ -z "$(ls -a /opt | grep ros)"]; then
-    echo -e "${blue}Instaling ROS2 Humble${NC}"
+        # Colcon Setup
+        sudo apt install python3-colcon-common-extensions -y
 
-    # Instalar o ROS Humble
-    sudo apt install python3-pip
-    sudo apt install software-properties-common -y
-    sudo add-apt-repository universe -y
-    sudo apt update && sudo apt install curl -y
-    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-    sudo apt update && sudo apt upgrade -y
-    sudo apt install ros-humble-desktop -y
-    sudo apt install ros-dev-tools -y
+        # Intalar Onshape to Robot
+        pip install onshape-to-robot
 
-    # Colcon Setup
-    sudo apt install python3-colcon-common-extensions -y
+        # Source
+        if [[ "$SHELL" == *"zsh"* ]]; then
+            source /opt/ros/humble/setup.zsh
+        else
+            source /opt/ros/humble/setup.bash
+        fi
 
-    # Intalar Onshape to Robot
-    pip install onshape-to-robot
-
-    # Source
-    if [[ "$SHELL" == *"zsh"* ]]; then
-        source /opt/ros/humble/setup.zsh
-    else
-        source /opt/ros/humble/setup.bash
+        echo -e "${green}ROS Installed Successfully${NC}"
     fi
 
-    echo -e "${green}ROS Installed Successfully${NC}"
+#################################################################
+#                               _       _                       #
+#                 ___  ___ _ __(_)_ __ | |_ ___                 #
+#                / __|/ __| '__| | '_ \| __/ __|                #
+#                \__ \ (__| |  | | |_) | |_\__ \                #
+#                |___/\___|_|  |_| .__/ \__|___/                #
+#                                |_|                            #
+#################################################################
+    if ! grep -q 'source /home/robot/TCC/scripts.sh' ~/.bashrc; then
+        echo 'source /home/robot/TCC/scripts.sh' >> ~/.bashrc
+    fi
+
+    if [ -n "$(ls -a ~/ | grep .zshrc)" ]; then
+        if ! grep -q 'source /home/robot/TCC/scripts.sh' ~/.zshrc; then
+            echo 'source /home/robot/TCC/scripts.sh' >> ~/.zshrc
+        fi
+    fi
