@@ -7,6 +7,6 @@
 
 #include "defines.h"
 
-const int ENCODERS_DIRECTION[] = {1, 1, 1};
+const int ENCODERS_DIRECTION[] = {-1, -1, 1};
 
 

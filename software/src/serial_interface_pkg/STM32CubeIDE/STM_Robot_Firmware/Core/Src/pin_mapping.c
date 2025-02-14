@@ -11,13 +11,13 @@
  * 	CH1: PA15 (CN7  Pin 17 de 38) | Arduino Pin XXX
  * 	CH2: PB3  (CN10 Pin 31 de 38) | Arduino Pin D3
  */
-TIM_HandleTypeDef *ENCODER_0 = &htim2;
+TIM_HandleTypeDef *ENCODER_0 = &htim3;
 
 /*	ENCODER 1 PINOUT
  * 	CH1: PA6  (CN10 Pin 13 de 38) | Arduino Pin D12
  * 	CH2: PA7  (CN10 Pin 15 de 38) | Arduino Pin D11
  */
-TIM_HandleTypeDef *ENCODER_1 = &htim3;
+TIM_HandleTypeDef *ENCODER_1 = &htim2;
 
 /*	ENCODER 2 PINOUT
  * 	CH1: PB6  (CN10 Pin 3  de 38) | Arduino Pin D15

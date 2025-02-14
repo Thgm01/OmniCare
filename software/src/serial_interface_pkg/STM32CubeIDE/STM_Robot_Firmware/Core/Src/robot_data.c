@@ -8,8 +8,6 @@
 #include "defines.h"
 #include "pin_mapping.h"
 
-extern Motors motors_data[3];
-
 void Init_Motors_Data()
 {
 	for(int i=0; i<3; i++)
@@ -17,6 +15,13 @@ void Init_Motors_Data()
 		motors_data[i].position_m = 0;
 		motors_data[i].velocity_rpm = 0;
 		init_encoder(&motors_data[i].encoder);
+
+		MOTOR0_PMW_CW  = 0;
+		MOTOR0_PMW_ACW = 0;
+		MOTOR1_PMW_CW  = 0;
+		MOTOR1_PMW_ACW = 0;
+		MOTOR2_PMW_CW  = 0;
+		MOTOR2_PMW_ACW = 0;
 	}
 }
 
