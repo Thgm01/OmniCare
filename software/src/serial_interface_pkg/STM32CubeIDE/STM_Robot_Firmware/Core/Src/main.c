@@ -149,17 +149,6 @@ int main(void)
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
 
-  //TODO remover essa parte depois que acabar de configurar a comunicacao serial
-  TIM5->CCR1 = 255;
-  TIM5->CCR2 = 255;
-  TIM5->CCR3 = 255;
-  TIM5->CCR4 = 255;
-//
-  TIM15->CCR1 = 255;
-  TIM15->CCR2 = 255;
-
-
-
   /* USER CODE END 2 */
 
   MX_ThreadX_Init();

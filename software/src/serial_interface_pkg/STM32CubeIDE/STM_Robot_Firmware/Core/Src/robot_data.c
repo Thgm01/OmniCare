@@ -78,8 +78,8 @@ void set_motors_velocity(int16_t *velocity_list)
 		pwm_negative = abs(velocity_list[0]);
 	}
 
-	MOTOR0_PMW_POSITIVE = pwm_positive;
-	MOTOR0_PMW_NEGATIVE = pwm_negative;
+	MOTOR0_PMW_CW = pwm_positive;
+	MOTOR0_PMW_ACW = pwm_negative;
 
 	pwm_positive = velocity_list[1];
 	pwm_negative = 0;
@@ -89,8 +89,8 @@ void set_motors_velocity(int16_t *velocity_list)
 		pwm_negative = abs(velocity_list[1]);
 	}
 
-	MOTOR1_PMW_POSITIVE = pwm_positive;
-	MOTOR1_PMW_NEGATIVE = pwm_negative;
+	MOTOR1_PMW_CW = pwm_positive;
+	MOTOR1_PMW_ACW = pwm_negative;
 
 	pwm_positive = velocity_list[2];
 	pwm_negative = 0;
@@ -100,7 +100,6 @@ void set_motors_velocity(int16_t *velocity_list)
 		pwm_negative = abs(velocity_list[2]);
 	}
 
-	MOTOR2_PMW_POSITIVE = pwm_positive;
-	MOTOR2_PMW_NEGATIVE = pwm_negative;
+	MOTOR2_PMW_CW = pwm_positive;
+	MOTOR2_PMW_ACW = pwm_negative;
 }
-
