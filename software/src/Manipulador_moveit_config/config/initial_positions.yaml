@@ -1,9 +1,0 @@
-# Default initial positions for Manipulador's ros2_control fake system
-
-initial_positions:
-  base_cima_to_base_link: 0
-  braco1_to_base_cima: 0
-  braco2_to_braco1: 0
-  braco3_to_braco2: 0
-  garra_base_to braco3: 0
-  garra_esquerda_to_garra_base: 0
