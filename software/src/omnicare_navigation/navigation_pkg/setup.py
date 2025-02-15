@@ -1,8 +1,8 @@
-from setuptools import setup
-
-package_name = 'simulation_pkg'
-
+from setuptools import find_packages, setup
 import os
+
+package_name = 'navigation_pkg'
+
 data_files=[
    ('share/ament_index/resource_index/packages',
        ['resource/' + package_name]),
@@ -24,22 +24,21 @@ def package_files(data_files, directory_list):
        data_files.append((key, paths_dict[key]))
    return data_files
 
+
 setup(
     name=package_name,
     version='0.0.0',
-    packages=[package_name],
-    data_files=package_files(data_files, [ 'config/', 'launch/', 'simulation/']),
+    packages=find_packages(exclude=['test']),
+    data_files=package_files(data_files, [ 'config/','launch/']),
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Lucas Lagoeiro',
-    maintainer_email='llagoeiro@out.com.br',
-    description='Simulation Pkg"',
-    license='TODO: License declaration',
+    maintainer='llagoeiro',
+    maintainer_email='llagoeiro@outlook.com.br',
+    description='TODO: Package description',
+    license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'checkpoints = simulation_pkg.checkpoints:main',
-            'robot = simulation_pkg.robot:main'
         ],
     },
 )

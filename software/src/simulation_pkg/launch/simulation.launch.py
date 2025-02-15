@@ -20,7 +20,7 @@ def generate_launch_description():
 
     world_path = DeclareLaunchArgument(
         name='world_path', 
-        default_value='', 
+        default_value=[get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'], 
         description=''
     )
 

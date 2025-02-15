@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "f1087202ed3bbce5cb488036",
+    "documentMicroversion": "493bf76565a4c2b36b09e82c",
+    "documentVersion": "93a1c3c2f5b6f04a59bff1ab",
+    "elementId": "a437e113f6ca41b31c72a1cb",
+    "fullConfiguration": "default",
+    "id": "MyHA+BRdc3ZvKNLxP",
+    "isStandardContent": false,
+    "name": "LIDAR <1>",
+    "partId": "JHD",
+    "suppressed": false,
+    "type": "Part"
+}
