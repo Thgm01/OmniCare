@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <xacro:arg name="sim_mode" default="false" />
 
-    <xacro:include filename="$(find omnicare_description)/urdf/robot.gazebo" />
-    <!-- <xacro:include filename="$(find omnicare_description)/urdf/ros2_control.xacro"/> -->
+    <xacro:if value="$(arg sim_mode)">
+        <xacro:include filename="$(find omnicare_description)/urdf/robot.gazebo" />
+    </xacro:if>
+    <xacro:unless value="$(arg sim_mode)">
+        <xacro:include filename="$(find omnicare_description)/urdf/ros2_control.xacro" />
+    </xacro:unless>
+
+
+    <!-- <xacro:include filename="$(find omnicare_description)/urdf/robot.gazebo" /> -->
+    <!-- <xacro:include filename="$(find omnicare_description)/urdf/ros2_control.xacro" /> -->
 
 
     <joint name="base_footprint_to_base_link" type="fixed">
@@ -1816,9 +1825,6 @@
         <limit effort="1" velocity="20" />
         <joint_properties friction="0.1" />
     </joint>
-
-
-    
 
 
 </robot>
