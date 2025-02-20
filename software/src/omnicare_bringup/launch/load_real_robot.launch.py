@@ -20,7 +20,7 @@ def generate_launch_description():
         description='Top-level namespace')
 
     urdf_path = get_package_share_path('omnicare_description')
-    rviz_path = get_package_share_path('simulation_pkg')
+    rviz_path = get_package_share_path('omnicare_simulation')
 
     default_model_path = urdf_path / 'urdf/robot.xacro'
     default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
@@ -54,7 +54,7 @@ def generate_launch_description():
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        output='screen',
+        output='both',
         parameters=[{
             'use_sim_time': LaunchConfiguration('use_sim_time'), 
             'robot_description': robot_description
@@ -62,7 +62,7 @@ def generate_launch_description():
         arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
 
-    twist_mux_params = os.path.join(get_package_share_directory('simulation_pkg'),'config/nav','twist_mux.yaml')
+    twist_mux_params = os.path.join(get_package_share_directory('omnicare_simulation'),'config/nav','twist_mux.yaml')
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
@@ -77,7 +77,8 @@ def generate_launch_description():
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[{'robot_description': robot_description},
-                controller_params_file]
+                controller_params_file],
+        output="both",
     )
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
@@ -126,7 +127,7 @@ def generate_launch_description():
         executable='ekf_node',
         name='ekf_node',
         output='screen',
-        parameters=[os.path.join(get_package_share_path('omnicare_description'), 'config/ros2_control/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+        parameters=[os.path.join(get_package_share_path('navigation_pkg'), 'config/nav/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
 
