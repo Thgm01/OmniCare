@@ -52,9 +52,9 @@ class InterfacePublisher(Node):
 
                 self.get_logger().debug(f'PWM Data: {self.pwm_data.data[MotorsPWM.MOTOR_0]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_1]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_2]:03}' )
 
-                raw_data = self.ser.read(24)  # Lê 3 bytes enviados pelo STM32
+                raw_data = self.ser.read(12)  # Lê 3 bytes enviados pelo STM32
 
-                if len(raw_data) == 24:
+                if len(raw_data) == 12:
                     # Interpreta como decimais
                     serial_motors_data = struct.unpack('6f', raw_data)  # converte em 6 floats de 4 bytes
                     

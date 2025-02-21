@@ -133,7 +133,7 @@ VOID usbx_cdc_acm_read_thread_entry(ULONG thread_input)
     }
 }
 
-float encoder_message[6];
+uint32_t encoder_message[3];
 
 /**
   * @brief  Function implementing usbx_cdc_acm_write_thread_entry.
@@ -148,12 +148,12 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     {
     	update_all_motors_data();
 
-    	encoder_message[0] = motors_data[0].velocity_rpm;
-    	encoder_message[1] = motors_data[0].position_m;
-    	encoder_message[2] = motors_data[1].velocity_rpm;
-    	encoder_message[3] = motors_data[1].position_m;
-    	encoder_message[4] = motors_data[2].velocity_rpm;
-    	encoder_message[5] = motors_data[2].position_m;
+    	encoder_message[0] = motors_data[0].encoder.last_count;
+    	encoder_message[1] = motors_data[1].encoder.last_count;
+    	encoder_message[2] = motors_data[2].encoder.last_count;
+
+
+
 
 		ux_device_class_cdc_acm_write(cdc_acm, (UCHAR *)(encoder_message), sizeof(encoder_message), &tx_actual_length);
 

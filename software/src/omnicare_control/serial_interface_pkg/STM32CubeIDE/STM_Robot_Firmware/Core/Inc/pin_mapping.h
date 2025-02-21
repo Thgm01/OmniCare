@@ -19,13 +19,13 @@ extern TIM_HandleTypeDef *ENCODER_1;
 extern TIM_HandleTypeDef *ENCODER_2;
 
 
-#define MOTOR0_PMW_POSITIVE (*((volatile uint32_t *)&TIM5->CCR1))
-#define MOTOR0_PMW_NEGATIVE (*((volatile uint32_t *)&TIM5->CCR2))
+#define MOTOR0_PMW_POSITIVE (*((volatile uint32_t *)&TIM5->CCR2))
+#define MOTOR0_PMW_NEGATIVE (*((volatile uint32_t *)&TIM5->CCR1))
 
 #define MOTOR1_PMW_POSITIVE (*((volatile uint32_t *)&TIM5->CCR3))
 #define MOTOR1_PMW_NEGATIVE (*((volatile uint32_t *)&TIM5->CCR4))
 
-#define MOTOR2_PMW_POSITIVE (*((volatile uint32_t *)&TIM15->CCR1))
-#define MOTOR2_PMW_NEGATIVE (*((volatile uint32_t *)&TIM5->CCR2))
+#define MOTOR2_PMW_POSITIVE (*((volatile uint32_t *)&TIM15->CCR2))
+#define MOTOR2_PMW_NEGATIVE (*((volatile uint32_t *)&TIM15->CCR1))
 
 #endif /* INC_PIN_MAPPING_H_ */
