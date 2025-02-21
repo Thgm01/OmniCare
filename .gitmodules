@@ -1,6 +1,8 @@
 [submodule "software/src/bno055"]
 	path = software/src/bno055
 	url = git@github.com:Thgm01/bno055.git
+
 [submodule "software/src/omnicare_navigation/rplidar_ros"]
 	path = software/src/omnicare_navigation/rplidar_ros
 	url = https://github.com/Thgm01/rplidar_ros.git
+	branch  = ros2
