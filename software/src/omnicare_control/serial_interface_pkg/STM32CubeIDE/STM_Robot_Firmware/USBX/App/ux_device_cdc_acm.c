@@ -24,6 +24,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include <inttypes.h>
+
 #include "defines.h"
 #include "robot_data.h"
 
@@ -133,24 +135,30 @@ VOID usbx_cdc_acm_read_thread_entry(ULONG thread_input)
     }
 }
 
-uint32_t encoder_message[3];
 
 /**
   * @brief  Function implementing usbx_cdc_acm_write_thread_entry.
   * @param  thread_input: Not used
   * @retval none
   */
+
+char encoder_message[40];
+
 VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
 {
     /* Private Variables */
     ULONG tx_actual_length;
     while(1)
     {
+    	char encoder_message[40];
+
     	update_all_motors_data();
 
-    	encoder_message[0] = motors_data[0].encoder.last_count;
-    	encoder_message[1] = motors_data[1].encoder.last_count;
-    	encoder_message[2] = motors_data[2].encoder.last_count;
+    	sprintf(encoder_message, "%" PRId32 " %" PRId32 " %" PRId32 "\n",
+    			motors_data[0].encoder.last_count,
+				motors_data[1].encoder.last_count,
+				motors_data[2].encoder.last_count);
+//    	sprintf(encoder_message, "100 200 300\n");
 
 
 

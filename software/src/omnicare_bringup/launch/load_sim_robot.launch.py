@@ -20,7 +20,7 @@ def generate_launch_description():
         description='Top-level namespace')
 
     urdf_path = get_package_share_path('omnicare_description')
-    rviz_path = get_package_share_path('simulation_pkg')
+    rviz_path = get_package_share_path('omnicare_simulation')
 
     default_model_path = urdf_path / 'urdf/robot.xacro'
     default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
