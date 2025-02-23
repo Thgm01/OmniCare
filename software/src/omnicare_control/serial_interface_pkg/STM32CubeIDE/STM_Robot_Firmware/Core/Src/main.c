@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "defines.h"
 #include "pin_mapping.h"
 #include "robot_data.h"
 
@@ -82,15 +81,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == ENCODER_0)
 	{
-		motors_data[0].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		motors_data[0].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[0];
 	}
 	else if (htim == ENCODER_1)
 	{
-		motors_data[1].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		motors_data[1].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[1];
 	}
 	else
 	{
-		motors_data[2].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		motors_data[2].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[2];
 	}
 }
 

@@ -19,6 +19,7 @@ void Init_Motors_Data();
 void set_motors_velocity(int16_t *velocity_list);
 
 
+extern const int ENCODERS_DIRECTION[];
 void init_encoders();
 
 

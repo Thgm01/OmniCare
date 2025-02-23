@@ -26,7 +26,6 @@
 
 #include <inttypes.h>
 
-#include "defines.h"
 #include "robot_data.h"
 
 /* USER CODE END Includes */
@@ -163,7 +162,7 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
 
 		ux_device_class_cdc_acm_write(cdc_acm, (UCHAR *)(encoder_message), sizeof(encoder_message), &tx_actual_length);
 
-		tx_thread_sleep(SPEED_READ_INTERVAL_MS);
+		tx_thread_sleep(10);
     }
 
 }

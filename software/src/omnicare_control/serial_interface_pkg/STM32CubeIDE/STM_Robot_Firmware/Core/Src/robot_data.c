@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "defines.h"
 #include "pin_mapping.h"
 
 extern MotorData motors_data[3];
@@ -59,6 +58,8 @@ void set_motors_velocity(int16_t *velocity_list)
 	MOTOR2_PMW_NEGATIVE = pwm_negative;
 }
 
+
+const int ENCODERS_DIRECTION[] = {-1, -1, 1};
 
 void init_encoders()
 {
