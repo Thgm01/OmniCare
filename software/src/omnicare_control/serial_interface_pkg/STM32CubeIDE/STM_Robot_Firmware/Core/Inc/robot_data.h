@@ -3,23 +3,23 @@
 
 #include <stdint.h>
 
-#include "encoder.h"
+#include "pin_mapping.h"
+#include "robot_data.h"
 
 typedef struct
 {
-	float position_m;
-	float velocity_rpm;
-	Encoder encoder;
-} Motors;
+	int16_t set_point_velocity;
+	int32_t encoder;
+} MotorData;
 
-extern Motors motors_data[3];
+extern MotorData motors_data[3];
 
 void Init_Motors_Data();
-void Update_Motors_Data(int Motor_Number);
-void update_all_motors_data();
 
 void set_motors_velocity(int16_t *velocity_list);
 
+
+void init_encoders();
 
 
 #endif /* INC_ROBOT_DATA_H_ */

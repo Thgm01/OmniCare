@@ -57,7 +57,7 @@ PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
 
-Motors motors_data[3];
+MotorData motors_data[3];
 
 /* USER CODE END PV */
 
@@ -82,15 +82,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == ENCODER_0)
 	{
-		motors_data[0].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[0].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
 	}
 	else if (htim == ENCODER_1)
 	{
-		motors_data[1].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[1].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
 	}
 	else
 	{
-		motors_data[2].encoder.last_count = __HAL_TIM_GET_COUNTER(htim);
+		motors_data[2].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
 	}
 }
 

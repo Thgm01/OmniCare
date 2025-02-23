@@ -126,11 +126,11 @@ VOID usbx_cdc_acm_read_thread_entry(ULONG thread_input)
     {
 	   if(cdc_acm != UX_NULL)
 	   {
-		   	   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
+		   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
 
-		   	if (rx_actual_length == sizeof(velocity_pwm_rx)) {
-		   		set_motors_velocity(velocity_pwm_rx);
-		   	}
+		   if (rx_actual_length == sizeof(velocity_pwm_rx)) {
+			   set_motors_velocity(velocity_pwm_rx);
+		   }
 	   }
     }
 }
@@ -152,12 +152,10 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     {
     	char encoder_message[40];
 
-    	update_all_motors_data();
-
     	sprintf(encoder_message, "%" PRId32 " %" PRId32 " %" PRId32 "\n",
-    			motors_data[0].encoder.last_count,
-				motors_data[1].encoder.last_count,
-				motors_data[2].encoder.last_count);
+    			motors_data[0].encoder,
+				motors_data[1].encoder,
+				motors_data[2].encoder);
 //    	sprintf(encoder_message, "100 200 300\n");
 
 
