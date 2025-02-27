@@ -81,15 +81,28 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == ENCODER_0)
 	{
-		motors_data[0].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[0];
+		motors_data[0].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		if(ENCODERS_DIRECTION[0] == -1)
+		{
+			motors_data[0].encoder = 0xFFFFFFFF/4 - motors_data[0].encoder;
+		}
 	}
 	else if (htim == ENCODER_1)
 	{
-		motors_data[1].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[1];
+		motors_data[1].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		if(ENCODERS_DIRECTION[1] == -1)
+		{
+			motors_data[1].encoder = 0xFFFFFFFF/4 - motors_data[1].encoder;
+		}
 	}
 	else
 	{
-		motors_data[2].encoder = __HAL_TIM_GET_COUNTER(htim)/4 * ENCODERS_DIRECTION[2];
+		motors_data[2].encoder = __HAL_TIM_GET_COUNTER(htim)/4;
+		if(ENCODERS_DIRECTION[2] == -1)
+		{
+			motors_data[2].encoder = 0xFFFFFFFF/4 - motors_data[2].encoder;
+		}
+
 	}
 }
 

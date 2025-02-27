@@ -9,7 +9,7 @@
 typedef struct
 {
 	int16_t set_point_velocity;
-	int32_t encoder;
+	uint32_t encoder;
 } MotorData;
 
 extern MotorData motors_data[3];
