@@ -6,6 +6,9 @@ NC='\e[0m' #No Color
 
 echo -e "${blue} STARTING JETSON CONFIGURATION ${NC}"
 
+git submodules init
+git submodules update
+
 sudo apt update & sudo apt upgrade -y
 sudo apt install python3-pip
 
@@ -166,9 +169,26 @@ chsh -s $(which zsh)
         else
             source /opt/ros/humble/setup.bash
         fi
+        
+        # Instalando dependencias do ROS2
+        rosdep init
+        rosdep update
+        rosdep install --from-paths src --ignore-src -r -y
+
+        source /software/src/omnicare_navigation/rplidar_ros/scripts/create_udev_rules.sh
 
         echo -e "${green}ROS Installed Successfully${NC}"
     fi
+
+
+
+    # remover as linhas autoload -U +x compinit && compinit
+    # e autoload -U +x bashcompinit && bashcompinit dos arquivos abaixo:
+    #
+    # sudo vim /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/ros2cli/environment/ros2-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/ament_index_python/environment/ament_index-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/rosidl_cli/environment/rosidl-argcomplete.zsh
 
 #################################################################
 #                               _       _                       #
