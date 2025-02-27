@@ -73,7 +73,7 @@ if [ -z "$(which code)" ]; then
     wget -O code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64"
     sudo dpkg -i code.deb
     sudo apt --fix-broken install -y
-    rm -rf 
+    rm -rf code.deb
 
     if [ -z "$(which code )" ]; then
         echo -e "${red}ERROR: VS Code Instalation${NC}"
@@ -98,7 +98,7 @@ sudo apt install zsh curl -y
 
 
 # Instalacao da fonte para usar no terminal
-if [ -z "$(ls -a ~/.local/share | grep fonts)"]; then
+if [ -z "$(ls -a ~/.local/share | grep fonts)" ]; then
     echo -e "${blue}Instaling Nerd Fonts${NC}"
     wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip \
     && cd ~/.local/share/fonts \
@@ -140,7 +140,7 @@ chsh -s $(which zsh)
 #                   |_| \_\\___/|____/_____|                    #
 #                                                               #
 #################################################################
-    if [ -z "$(ls -a /opt | grep ros)"]; then
+    if [ -z "$(ls -a /opt | grep ros)" ]; then
         echo -e "${blue}Instaling ROS2 Humble${NC}"
 
         # Instalar o ROS Humble
