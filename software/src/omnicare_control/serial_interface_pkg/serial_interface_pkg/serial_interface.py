@@ -31,6 +31,8 @@ class InterfacePublisher(Node):
             print(f"Erro ao acessar a porta {self.usb_port}: {e}")
             self.ser = None
 
+
+
     def timer_callback(self):
         motors_data_msg = MotorsData()
 
@@ -46,30 +48,18 @@ class InterfacePublisher(Node):
         else:
             try:
                 values = (self.pwm_data.data[MotorsPWM.MOTOR_0], self.pwm_data.data[MotorsPWM.MOTOR_1], self.pwm_data.data[MotorsPWM.MOTOR_2])
-                # Converte os valores para bytes (formato little-endian, int16 = 'h' * 3)
-                data = struct.pack('<hhh', *values)
-                self.ser.write(data)
+                
+                # TODO: Reesrever essa função para ele conseguir mandar também os valores
+                # data = struct.pack('<hhh', *values)
+                # self.ser.write(data)
 
                 self.get_logger().debug(f'PWM Data: {self.pwm_data.data[MotorsPWM.MOTOR_0]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_1]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_2]:03}' )
 
                 # raw_data = self.ser.read(12)  # Lê 3 bytes enviados pelo STM32
                 linha = self.ser.readline().decode('utf-8').strip()  # Lê 3 bytes enviados pelo STM32
                 self.get_logger().info(f'{linha}')
-
-                # if len(raw_data) == 12:
-                    # # Interpreta como decimais
-                    # serial_motors_data = struct.unpack('6f', raw_data)  # converte em 6 floats de 4 bytes
-                    
-                    # motors_data_msg.velocity_rpm[MotorsData.MOTOR_0] = serial_motors_data[0]
-                    # motors_data_msg.position_m[MotorsData.MOTOR_0] = serial_motors_data[1]
-
-                    # motors_data_msg.velocity_rpm[MotorsData.MOTOR_1] = serial_motors_data[2]
-                    # motors_data_msg.position_m[MotorsData.MOTOR_1] = serial_motors_data[3]
-
-                    # motors_data_msg.velocity_rpm[MotorsData.MOTOR_2] = serial_motors_data[4]
-                    # motors_data_msg.position_m[MotorsData.MOTOR_2] = serial_motors_data[5]
-
-                    # self.get_logger().info(f'{serial_motors_data[0]}, {serial_motors_data[1]}, {serial_motors_data[2]}, {serial_motors_data[3]}, {serial_motors_data[4]}, {serial_motors_data[5]}')
+                valores = list(map(int, linha.split()))
+                print(valores)
 
                 # #publicando a data no tópico
                 self.motors_data_publisher_.publish(motors_data_msg)

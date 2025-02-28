@@ -1,5 +1,5 @@
-[submodule "software/src/bno055"]
-	path = software/src/bno055
+[submodule "software/src/omnicare_navigation/bno055"]
+	path = software/src/omnicare_navigation/bno055
 	url = git@github.com:Thgm01/bno055.git
 
 [submodule "software/src/omnicare_navigation/rplidar_ros"]

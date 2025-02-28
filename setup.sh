@@ -6,8 +6,46 @@ NC='\e[0m' #No Color
 
 echo -e "${blue} STARTING JETSON CONFIGURATION ${NC}"
 
-sudo apt update & sudo apt upgrade -y
+git submodules init
+git submodules update
 
+sudo apt update & sudo apt upgrade -y
+sudo apt install python3-pip
+
+
+if [ -z "$(pip show jetson-stats)" ]; then
+    sudo pip3 install -U jetson-stats
+fi 
+
+if [ -z "$(pip show ultralytics)" ]; then
+    pip install ultralytics[export]
+    if [ -n "$(pip show ultralytics)" ]; then
+        sudo reboot
+    fi
+fi 
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/arm64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install libcusparselt0 libcusparselt-dev cuda-toolkit-12-4 cuda-compat-12-4
+sudo ln -sfn /usr/local/cuda-12.4 /usr/local/cuda
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y python3-pip libjpeg-dev libpng-dev libtiff-dev
+
+pip install https://developer.download.nvidia.com/compute/redist/jp/v61/pytorch/torch-2.5.0a0+872d972e41.nv24.08.17622132-cp310-cp310-linux_aarch64.whl
+
+pip install "numpy<2.0" 
+git clone https://github.com/pytorch/vision.git torchvision
+cd torchvision
+git checkout v0.20.0
+sudo python3 setup.py install
+pip uninstall torchvision==0.21.0
+
+pip install onnx2tf==1.26.3
+pip install onnx_graphsurgeon
+pip install sng4onnx
+pip install tflite_support
 
 #################################################################
 #                       _                                       #
@@ -38,7 +76,7 @@ if [ -z "$(which code)" ]; then
     wget -O code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64"
     sudo dpkg -i code.deb
     sudo apt --fix-broken install -y
-    rm -rf 
+    rm -rf code.deb
 
     if [ -z "$(which code )" ]; then
         echo -e "${red}ERROR: VS Code Instalation${NC}"
@@ -63,7 +101,7 @@ sudo apt install zsh curl -y
 
 
 # Instalacao da fonte para usar no terminal
-if [ -z "$(ls -a ~/.local/share | grep fonts)"]; then
+if [ -z "$(ls -a ~/.local/share | grep fonts)" ]; then
     echo -e "${blue}Instaling Nerd Fonts${NC}"
     wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip \
     && cd ~/.local/share/fonts \
@@ -105,11 +143,10 @@ chsh -s $(which zsh)
 #                   |_| \_\\___/|____/_____|                    #
 #                                                               #
 #################################################################
-    if [ -z "$(ls -a /opt | grep ros)"]; then
+    if [ -z "$(ls -a /opt | grep ros)" ]; then
         echo -e "${blue}Instaling ROS2 Humble${NC}"
 
         # Instalar o ROS Humble
-        sudo apt install python3-pip
         sudo apt install software-properties-common -y
         sudo add-apt-repository universe -y
         sudo apt update && sudo apt install curl -y
@@ -132,9 +169,26 @@ chsh -s $(which zsh)
         else
             source /opt/ros/humble/setup.bash
         fi
+        
+        # Instalando dependencias do ROS2
+        rosdep init
+        rosdep update
+        rosdep install --from-paths src --ignore-src -r -y
+
+        source /software/src/omnicare_navigation/rplidar_ros/scripts/create_udev_rules.sh
 
         echo -e "${green}ROS Installed Successfully${NC}"
     fi
+
+
+
+    # remover as linhas autoload -U +x compinit && compinit
+    # e autoload -U +x bashcompinit && bashcompinit dos arquivos abaixo:
+    #
+    # sudo vim /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/ros2cli/environment/ros2-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/ament_index_python/environment/ament_index-argcomplete.zsh
+    # sudo vim /opt/ros/humble/share/rosidl_cli/environment/rosidl-argcomplete.zsh
 
 #################################################################
 #                               _       _                       #
