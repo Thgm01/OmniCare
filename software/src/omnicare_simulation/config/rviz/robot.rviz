@@ -3,9 +3,12 @@ Panels:
     Help Height: 70
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /Global Options1
+        - /Odometry1
+        - /Odometry1/Covariance1
       Splitter Ratio: 0.5
-    Tree Height: 183
+    Tree Height: 822
   - Class: rviz_common/Views
     Expanded:
       - /Current View1
@@ -50,6 +53,11 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_footprint:
           Alpha: 1
           Show Axes: false
@@ -58,37 +66,197 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
+        roda:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        drivewhl_l_link:
+        roda_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        drivewhl_r_link:
+        roda_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_caster:
+        rolete:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        imu_link:
+        rolete_10:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        lidar_link:
+        rolete_11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_13:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_14:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_15:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_16:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_17:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_18:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_19:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_20:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_21:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_22:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_23:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_24:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_25:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_26:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_27:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_28:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_29:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_30:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_31:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_32:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_33:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_34:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_35:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_36:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rolete_9:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -106,25 +274,19 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base:
+          Value: true
         base_footprint:
           Value: true
         base_link:
           Value: true
-        camera_depth_frame:
-          Value: true
-        camera_link:
-          Value: true
-        drivewhl_l_link:
-          Value: true
-        drivewhl_r_link:
-          Value: true
-        front_caster:
-          Value: true
-        imu_link:
-          Value: true
-        lidar_link:
-          Value: true
         odom:
+          Value: true
+        roda:
+          Value: true
+        roda_2:
+          Value: true
+        roda_3:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -132,24 +294,15 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          base_footprint:
-            {}
-          camera_link:
-            camera_depth_frame:
-              {}
-          drivewhl_l_link:
-            {}
-          drivewhl_r_link:
-            {}
-          front_caster:
-            {}
-          imu_link:
-            {}
-          lidar_link:
-            {}
         odom:
-          {}
+          base_link:
+            base:
+              roda:
+                {}
+              roda_2:
+                {}
+              roda_3:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -187,7 +340,7 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -199,11 +352,50 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /depth_camera/image_raw
+      Value: false
+    - Angle Tolerance: 0.10000000149011612
+      Class: rviz_default_plugins/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: false
+      Enabled: true
+      Keep: 10
+      Name: Odometry
+      Position Tolerance: 0.10000000149011612
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odometry/filtered
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -215,7 +407,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 7.271618366241455
+      Distance: 7.087941646575928
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -230,22 +422,22 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.33000001311302185
+      Pitch: 0.779999852180481
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.5
+      Yaw: 6.245011329650879
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 800
+  Height: 1043
   Hide Left Dock: false
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000019b000002cafc0200000003fb000000100044006900730070006c006100790073010000003b00000138000000c700fffffffb0000000a005600690065007700730100000179000000c8000000a000fffffffb0000000a0049006d0061006700650100000247000000be0000002800ffffff0000030f000002ca00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000001000000000000019b000003b9fc0200000003fb000000100044006900730070006c006100790073010000003d000003b9000000c900fffffffb0000000a0056006900650077007300000001e50000010c000000a400fffffffb0000000a0049006d006100670065000000028f000001670000002800ffffff000005df000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1200
-  X: 486
+  Width: 1920
+  X: 1920
   Y: 0
