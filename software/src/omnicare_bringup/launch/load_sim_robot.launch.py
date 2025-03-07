@@ -59,25 +59,14 @@ def generate_launch_description():
         }],
         arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
     )
-
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        condition=UnlessCondition(LaunchConfiguration('gui')),
-        output='log',
-        parameters=[{
-            'use_sim_time': LaunchConfiguration('use_sim_time')
-        }],
-        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
-    )
-
-    twist_mux_params = os.path.join(get_package_share_directory('simulation_pkg'),'config/nav','twist_mux.yaml')
-    twist_mux = Node(
-            package="twist_mux",
-            executable="twist_mux",
-            parameters=[twist_mux_params],
-            remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
-    )
+    
+    # twist_mux_params = os.path.join(get_package_share_directory('simulation_pkg'),'config/nav','twist_mux.yaml')
+    # twist_mux = Node(
+    #         package="twist_mux",
+    #         executable="twist_mux",
+    #         parameters=[twist_mux_params],
+    #         remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
+    # )
 
 
     rviz_node = Node(
@@ -118,12 +107,10 @@ def generate_launch_description():
         model_arg,
         rviz_arg,
         use_sim_time_arg,
-        # joint_state_publisher_node, #publica as juntas
-        # joint_state_publisher_gui_node, //controla as juntas
         robot_state_publisher_node, # publica o robô em si (URDF)
         spawn_entity, #Spawn do robô
         rviz_node, #RVIZ2 para debug
-        twist_mux, #MUX de prioridade das velocidades
+        # twist_mux, #MUX de prioridade das velocidades
         robot_localization_node #EKF
 
     ])

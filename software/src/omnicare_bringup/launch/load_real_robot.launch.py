@@ -71,8 +71,8 @@ def generate_launch_description():
     )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
-    controller_params_file = '/home/llagoeiro/Desktop/FEI/TCC/TCC/software/src/omnicare_control/omnicare_control_pkg/config/omnidirectional_controller.yaml'
-
+    controller_params_file =  os.path.join(get_package_share_directory('omnicare_control_pkg'), 'config/omnidirectional_controller.yaml') 
+    
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
