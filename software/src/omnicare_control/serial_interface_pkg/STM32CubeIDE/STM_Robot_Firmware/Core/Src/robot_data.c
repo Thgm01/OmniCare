@@ -17,6 +17,21 @@ void Init_Motors_Data()
 
 }
 
+void set_motors_velocity_string(char *char_velocity_list)
+{
+	int16_t pwm_motors[3];
+	char *token = strtok(char_velocity_list, " ");
+	char _ = token[0];
+
+	// Pegamos os próximos números
+	for (int i = 0; i < 3; i++) {
+	   token = strtok(NULL, " ");
+	   pwm_motors[i] = (int16_t)atoi(token);
+	}
+
+	set_motors_velocity(pwm_motors);
+}
+
 void set_motors_velocity(int16_t *velocity_list)
 {
 	motors_data[0].set_point_velocity = velocity_list[0];

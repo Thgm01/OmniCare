@@ -41,6 +41,9 @@ public:
     timeout_ms_ = timeout_ms;
     serial_conn_.Open(serial_device);
     serial_conn_.SetBaudRate(convert_baud_rate(baud_rate));
+    serial_conn_.SetCharacterSize(LibSerial::CharacterSize::CHAR_SIZE_8);
+    serial_conn_.SetStopBits(LibSerial::StopBits::STOP_BITS_1);
+    serial_conn_.SetParity(LibSerial::Parity::PARITY_NONE);
   }
 
   void disconnect()
@@ -81,12 +84,12 @@ public:
 
   void send_empty_msg()
   {
-    std::string response = send_msg("\r");
+    std::string response = send_msg("");
   }
 
   void read_encoder_values(int &val_1, int &val_2, int &val_3)
   {
-    std::string response = send_msg("e\r");
+    std::string response = send_msg("");
 
     std::string delimiter = " ";
     size_t del_pos1 = response.find(delimiter);
@@ -106,17 +109,18 @@ public:
   }
   void set_motor_values(int val_1, int val_2,int val_3)
   {
-    std::stringstream ss;
-    ss << "m " << val_1 << " " << val_2 << " " << val_3 << "\r";
-    send_msg(ss.str());
+    char msg[30] = {0};
+    sprintf(msg, "m %03d %03d %03d\n", val_1, val_2, val_3);
+    
+    send_msg(msg);
   }
 
 
   void set_pid_values(int k_p, int k_d, int k_i, int k_o)
   {
     std::stringstream ss;
-    ss << "u " << k_p << ":" << k_d << ":" << k_i << ":" << k_o << "\r";
-    send_msg(ss.str());
+    ss << "u " << k_p << ":" << k_d << ":" << k_i << ":" << k_o << "\0";
+    // send_msg(ss.str());
   }
 
 private:

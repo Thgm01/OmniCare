@@ -119,22 +119,17 @@ VOID USBD_CDC_ACM_ParameterChange(VOID *cdc_acm_instance)
 	{
 		/* Private Variables */
 		ULONG rx_actual_length;
-		char velocity_pwm_rx[30];
-		int16_t pwm_motors[3];
 
 		/* Infinite Loop */
 		while(1)
 		{
 		   if(cdc_acm != UX_NULL)
 		   {
+			   char velocity_pwm_rx[20] = {0};
 			   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
 
-			   if (rx_actual_length <= sizeof(velocity_pwm_rx)) {
-				   sscanf(velocity_pwm_rx, "%hd %hd %hd", &pwm_motors[0], &pwm_motors[1], &pwm_motors[2]);
-				   HAL_UART_Transmit(&huart1,(uint8_t*)"Receive the PWMs\n\r", sizeof("Receive the PWMs\n\r"), 1000);
-				   HAL_UART_Transmit(&huart1,(uint8_t*)pwm_motors, sizeof(pwm_motors), 1000);
-//				   ux_device_class_cdc_acm_write(cdc_acm, (UCHAR *)(pwm_motors), sizeof(pwm_motors), &rx_actual_length);
-				   set_motors_velocity(pwm_motors);
+			   if (rx_actual_length <= sizeof(velocity_pwm_rx) ) {
+				   if(velocity_pwm_rx[0]=='m') set_motors_velocity_string(velocity_pwm_rx);
 			   }
 		   }
 		}
@@ -165,7 +160,7 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
 
 
 
-    	HAL_UART_Transmit(&huart1,(uint8_t *)"I will read the USB-C!\n\r", sizeof("I will read the USB-C!\n\r"), 1000);
+//    	HAL_UART_Transmit(&huart1,(uint8_t *)"I will read the USB-C!\n\r", sizeof("I will read the USB-C!\n\r"), 1000);
 		ux_device_class_cdc_acm_write(cdc_acm, (UCHAR *)(encoder_message), sizeof(encoder_message), &tx_actual_length);
 
 		tx_thread_sleep(10);
