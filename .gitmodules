@@ -6,3 +6,8 @@
 	path = software/src/omnicare_navigation/rplidar_ros
 	url = https://github.com/Thgm01/rplidar_ros.git
 	branch  = ros2
+
+[submodule "software/src/omnicare_control/omnidirectional_controllers"]
+	path = software/src/omnicare_control/omnidirectional_controllers
+	url = https://github.com/Thgm01/omnidirectional_controllers.git
+	branch  = humble
