@@ -44,7 +44,13 @@ void set_motors_velocity(int16_t *velocity_list)
 	if(pwm_positive < 0)
 	{
 		pwm_positive = 0;
-		pwm_negative = abs(velocity_list[0]);
+//		pwm_negative = abs(velocity_list[0]);
+		pwm_negative = 254;
+	}
+	else if (pwm_positive > 0){
+		pwm_positive = 254;
+		pwm_negative = 0;
+
 	}
 
 	MOTOR0_PMW_POSITIVE = pwm_positive;
@@ -55,7 +61,13 @@ void set_motors_velocity(int16_t *velocity_list)
 	if(pwm_positive < 0)
 	{
 		pwm_positive = 0;
-		pwm_negative = abs(velocity_list[1]);
+//		pwm_negative = abs(velocity_list[1]);
+		pwm_negative = 254;
+	}
+	else if (pwm_positive > 0){
+		pwm_positive = 254;
+		pwm_negative = 0;
+
 	}
 
 	MOTOR1_PMW_POSITIVE = pwm_positive;
@@ -66,7 +78,13 @@ void set_motors_velocity(int16_t *velocity_list)
 	if(pwm_positive < 0)
 	{
 		pwm_positive = 0;
-		pwm_negative = abs(velocity_list[2]);
+//		pwm_negative = abs(velocity_list[2]);
+		pwm_negative = 254;
+	}
+	else if (pwm_positive > 0){
+		pwm_positive = 254;
+		pwm_negative = 0;
+
 	}
 
 	MOTOR2_PMW_POSITIVE = pwm_positive;

@@ -273,13 +273,17 @@ namespace omnidrive_stm32
     {
       return hardware_interface::return_type::ERROR;
     }
+    float radius = 0.140;
 
-    // Counters per loop
-    int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
-    int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-    int motor_b_counts_per_loop = wheel_b_.cmd / wheel_b_.rads_per_count / cfg_.loop_rate;
+    // 
+    // V = Omega * R (m/s) --> V = wheel_l_.cmd (rad/s) * radius (m)
+    // 
+    float motor_l_meters_per_second = wheel_l_.cmd * radius;
+    float motor_r_meters_per_second = wheel_r_.cmd * radius;
+    float motor_b_meters_per_second = wheel_b_.cmd * radius;
 
-    comms_.set_motor_values(motor_l_counts_per_loop,motor_r_counts_per_loop,motor_b_counts_per_loop);
+
+    comms_.set_motor_values(motor_l_meters_per_second,motor_r_meters_per_second,motor_b_meters_per_second);
     return hardware_interface::return_type::OK;
   }
 
