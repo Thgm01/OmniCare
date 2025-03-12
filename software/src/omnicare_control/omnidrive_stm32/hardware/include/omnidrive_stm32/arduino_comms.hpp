@@ -107,10 +107,10 @@ public:
     std::cout << " Enc_1: " << val_1 << " Enc_2: " << val_2 << " Enc_3: " << val_3 << std::endl;
 
   }
-  void set_motor_values(float val_1, float val_2,float val_3)
+  void set_motor_values(int val_1,int val_2,int val_3)
   {
     char msg[30] = {0};
-    sprintf(msg, "m %03f %03f %03f\n", val_1, val_2, val_3);
+    sprintf(msg, "m %09d %09d %09d\n", val_1, val_2, val_3);
 
     std::cout << "Motors: " << msg << std::endl;
     send_msg(msg);

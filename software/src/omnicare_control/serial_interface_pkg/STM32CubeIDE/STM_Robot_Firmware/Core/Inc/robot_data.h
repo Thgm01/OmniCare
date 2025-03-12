@@ -8,17 +8,24 @@
 
 typedef struct
 {
-	int16_t set_point_velocity;
-	uint32_t encoder;
+	int32_t set_point_velocity; // definir qual a unidade de medida dessa variavel no ros2 control
+	int32_t atual_velocity;  	// definir qual a unidade de medida dessa variavel no ros2 control
+	uint32_t encoder_last_count;
+	uint32_t encoder_actual_count;
+	float PID[3];
 } MotorData;
 
 extern MotorData motors_data[3];
 
 void Init_Motors_Data();
 
-void set_motors_velocity(int16_t *velocity_list);
+void actual_velocity(int Motor_Number,uint32_t dt);
+void update_all_motors_data(uint32_t dt);
+void set_motors_velocity(int32_t *velocity_list);
 void set_motors_velocity_string(char *velocity_list);
+void update_velocity(int *velocitys_pwm);
 
+void motor_pid_control_thread_entry(unsigned long thread_input);
 
 extern const int ENCODERS_DIRECTION[];
 void init_encoders();

@@ -125,7 +125,7 @@ VOID USBD_CDC_ACM_ParameterChange(VOID *cdc_acm_instance)
 		{
 		   if(cdc_acm != UX_NULL)
 		   {
-			   char velocity_pwm_rx[20] = {0};
+			   char velocity_pwm_rx[40] = {0};
 			   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
 
 			   if (rx_actual_length <= sizeof(velocity_pwm_rx) ) {
@@ -153,9 +153,9 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     	char encoder_message[40];
 
     	sprintf(encoder_message, "%" PRId32 " %" PRId32 " %" PRId32 "\n",
-    			motors_data[0].encoder,
-				motors_data[1].encoder,
-				motors_data[2].encoder);
+    			motors_data[0].encoder_actual_count,
+				motors_data[1].encoder_actual_count,
+				motors_data[2].encoder_actual_count);
 //    	sprintf(encoder_message, "100 200 300\n");
 
 
