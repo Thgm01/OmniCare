@@ -287,6 +287,9 @@ namespace omnidrive_stm32
     int motor_r_counts_per_second = wheel_r_.cmd / wheel_r_.rads_per_count;
     int motor_b_counts_per_second = wheel_b_.cmd / wheel_b_.rads_per_count;
     
+    // motor_l_counts_per_second = 6000;
+    // motor_r_counts_per_second = 0;
+    // motor_b_counts_per_second = 6000;
 
 
     comms_.set_motor_values(motor_l_counts_per_second,motor_r_counts_per_second,motor_b_counts_per_second);
