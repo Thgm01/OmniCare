@@ -3,35 +3,43 @@ from rclpy.node import Node
 from std_msgs.msg import Float32
 import matplotlib.pyplot as plt
 from collections import deque
+from omnicare_msgs.msg import MotorsData,MotorsPWM
+
 
 class RealtimePlotNode(Node):
     def __init__(self):
         super().__init__('realtime_plot_node')
         
-        self.declare_parameter('topic1', 'topic1')
-        self.declare_parameter('topic2', 'topic2')
+        self.declare_parameter('motors_data', 'motors_data')
+        self.declare_parameter('motors_pwm', 'motors_pwm')
         
-        self.topic1 = self.get_parameter('topic1').get_parameter_value().string_value
-        self.topic2 = self.get_parameter('topic2').get_parameter_value().string_value
+        self.get_speed = self.get_parameter('motors_data').get_parameter_value().string_value
+        self.set_speed = self.get_parameter('motors_pwm').get_parameter_value().string_value
         
-        self.sub1 = self.create_subscription(Float32, self.topic1, self.callback_topic1, 10)
-        self.sub2 = self.create_subscription(Float32, self.topic2, self.callback_topic2, 10)
-        self.maxlen = 3
+        self.sub1 = self.create_subscription(MotorsData, self.get_speed, self.callback_get_speed, 10)
+        self.sub2 = self.create_subscription(MotorsPWM, self.set_speed, self.callback_set_speed, 10)
+        self.maxlen = 50
         self.data1 = deque(maxlen=self.maxlen)
         self.data2 = deque(maxlen=self.maxlen)
         self.time = deque(maxlen=self.maxlen)
         self.counter1 = 0
         self.counter2 = 0
+
+        self.command_speed = False
         
-    def callback_topic1(self, msg):
-        if self.counter1 <= self.maxlen:
-            self.data1.append(msg.data)
-        self.counter1 += 1
-        self.check_and_plot()
+    def callback_get_speed(self, msg):
+        # print(msg)
+        if self.command_speed:
+            if self.counter1 <= self.maxlen:
+                self.data1.append(msg.motor_speed)
+                self.counter1 += 1
+                self.check_and_plot()
     
-    def callback_topic2(self, msg):
+    def callback_set_speed(self, msg):
+        self.command_speed = True
+        # print(msg)
         if self.counter2 <= self.maxlen:
-            self.data2.append(msg.data)
+            self.data2.append(msg.data[0])
         self.counter2 += 1
         self.check_and_plot()
         
@@ -41,8 +49,8 @@ class RealtimePlotNode(Node):
         
     def plot_graph(self):
         plt.figure()
-        plt.plot(range(3), list(self.data1), label=self.topic1)
-        plt.plot(range(3), list(self.data2), label=self.topic2)
+        plt.plot(range(self.maxlen), list(self.data1), label=self.get_speed)
+        plt.plot(range(self.maxlen), list(self.data2), label=self.set_speed)
         plt.xlabel('Amostras')
         plt.ylabel('Valores')
         plt.axhline(0, color='black', linewidth=1, linestyle='--')  # Linha horizontal no eixo y = 0

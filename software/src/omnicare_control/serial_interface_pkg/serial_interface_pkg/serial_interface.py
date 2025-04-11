@@ -12,7 +12,7 @@ class InterfacePublisher(Node):
         super().__init__('setial_interface_publisher')
         
         # TODO: Colocar .rules
-        self.usb_port = "/dev/ttyACM0"  # Substitua pelo nome da sua porta USB
+        self.usb_port = "/dev/usb-user"  # Substitua pelo nome da sua porta USB
         self.baud_rate = 115200           # Taxa de comunicação
 
         self.motors_data_publisher_ = self.create_publisher(MotorsData, 'motors_data', 10)
@@ -47,19 +47,44 @@ class InterfacePublisher(Node):
                 self.ser = None
         else:
             try:
-                values = (self.pwm_data.data[MotorsPWM.MOTOR_0], self.pwm_data.data[MotorsPWM.MOTOR_1], self.pwm_data.data[MotorsPWM.MOTOR_2])
+                # values = (self.pwm_data.data[MotorsPWM.MOTOR_0], self.pwm_data.data[MotorsPWM.MOTOR_1], self.pwm_data.data[MotorsPWM.MOTOR_2])
                 
                 # TODO: Reesrever essa função para ele conseguir mandar também os valores
                 # data = struct.pack('<hhh', *values)
                 # self.ser.write(data)
 
+                 # Convert ROS2 message to a simple string (CSV format)
+ 
+
+                pwm_string = f"m {self.pwm_data.data[MotorsPWM.MOTOR_0]} {self.pwm_data.data[MotorsPWM.MOTOR_1]} {self.pwm_data.data[MotorsPWM.MOTOR_2]}\n"
+ 
+
+
+ 
+
+                # Send over serial
+ 
+
+                self.ser.write(pwm_string.encode())
+ 
+
+
+ 
+
+                self.get_logger().info(f"Sent over serial: {pwm_string.strip()}")
+
                 self.get_logger().debug(f'PWM Data: {self.pwm_data.data[MotorsPWM.MOTOR_0]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_1]:03} / {self.pwm_data.data[MotorsPWM.MOTOR_2]:03}' )
 
                 # raw_data = self.ser.read(12)  # Lê 3 bytes enviados pelo STM32
-                linha = self.ser.readline().decode('utf-8').strip()  # Lê 3 bytes enviados pelo STM32
+                linha = self.ser.readline().decode('utf-8').strip()  # Lê 4 bytes enviados pelo STM32
                 self.get_logger().info(f'{linha}')
                 valores = list(map(int, linha.split()))
                 print(valores)
+
+                motors_data_msg.motor_speed = valores[0]
+                motors_data_msg.motor_error = valores[1]
+                motors_data_msg.motor_dt = valores[2]
+                motors_data_msg.motor_pwm = valores[3]
 
                 # #publicando a data no tópico
                 self.motors_data_publisher_.publish(motors_data_msg)
