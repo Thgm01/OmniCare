@@ -10,6 +10,9 @@
 
 extern MotorData motors_data[3];
 
+#define INTEGRAL_MAX 1000  // Valor máximo da integral
+#define INTEGRAL_MIN -1000 // Valor mínimo da integral
+
 void Init_Motors_Data()
 {
 	init_encoders();
@@ -20,7 +23,12 @@ void Init_Motors_Data()
 		motors_data[i].set_point_velocity = 0;
 		motors_data[i].atual_velocity = 0;
 
-		motors_data[i].PID[0] = 0.1;
+		motors_data[i].error = 0;
+		motors_data[i].dt = 0;
+		motors_data[i].PWM = 0;
+
+
+		motors_data[i].PID[0] = 0.125;
 		motors_data[i].PID[1] = 0;
 		motors_data[i].PID[2] = 0;
 	}
@@ -133,8 +141,8 @@ void motor_pid_control_thread_entry(unsigned long thread_input)
 {
 	int32_t last_error[3] = {0, 0 ,0};
 	int32_t error[3] = {0, 0 ,0};
-	double integral[3] = {0, 0 ,0};
-	double derivate[3] = {0, 0 ,0};
+	int32_t integral[3] = {0, 0 ,0};
+	float derivate[3] = {0, 0 ,0};
 	unsigned long atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
 	uint32_t last_time_ms = atual_ms;
 	int first_time = 1;
@@ -156,21 +164,33 @@ void motor_pid_control_thread_entry(unsigned long thread_input)
 
 			for(int i=0; i<3; i++){
 				error[i] 		= motors_data[i].set_point_velocity - motors_data[i].atual_velocity;
-				atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
-//				dt 				= atual_ms -last_time_ms;
-//				integral[i] 	= error[i]*dt;
+				motors_data[i].error = error[i];
+
+//				atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
+//				dt 				= atual_ms - last_time_ms;
+				motors_data[i].dt = dt;
+
+				integral[i] 	+= error[i]*dt;
+
+				// Evitar windup da integral
+				if (integral[i] > INTEGRAL_MAX) integral[i] = INTEGRAL_MAX;
+				if (integral[i] < INTEGRAL_MIN) integral[i] = INTEGRAL_MIN;
+
+
 //				derivate[i] 	= (error[i] - last_error[i])/dt;
 
 				last_error[i] = error[i];
-				motor_vel_pwm[i] = motors_data[i].PID[0] * error[i];
-//										  motors_data[i].PID[1] * integral[i] +
+				motor_vel_pwm[i] = motors_data[i].PID[0] * error[i] +
+										  motors_data[i].PID[1] * integral[i];
 //										  motors_data[i].PID[2] * derivate[i]);
+				motors_data[i].PWM = motor_vel_pwm[i];
+
 			}
 			update_velocity(motor_vel_pwm);
 		}
 //		atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
-//		last_time_ms = atual_ms;
-		tx_thread_sleep(2);
+		last_time_ms = atual_ms;
+		tx_thread_sleep(1);
 	}
 }
 

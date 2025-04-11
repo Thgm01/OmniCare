@@ -12,6 +12,9 @@ typedef struct
 	int32_t atual_velocity;  	// definir qual a unidade de medida dessa variavel no ros2 control
 	uint32_t encoder_last_count;
 	uint32_t encoder_actual_count;
+	int32_t error;
+	uint32_t dt;
+	uint32_t PWM;
 	float PID[3];
 } MotorData;
 
