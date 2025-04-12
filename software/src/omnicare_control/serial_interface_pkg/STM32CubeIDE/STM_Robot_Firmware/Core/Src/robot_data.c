@@ -28,8 +28,8 @@ void Init_Motors_Data()
 		motors_data[i].PWM = 0;
 
 
-		motors_data[i].PID[0] = 0.125;
-		motors_data[i].PID[1] = 0;
+		motors_data[i].PID[0] = 0.01;
+		motors_data[i].PID[1] = 0.0005;
 		motors_data[i].PID[2] = 0;
 	}
 }
@@ -77,6 +77,27 @@ void set_motors_velocity_string(char *char_velocity_list)
 	}
 
 	set_motors_velocity(count_per_seconds_motors);
+}
+
+
+void set_pid_config(char *char_pid_list)
+{
+	float pid[3];
+	char *token = strtok(char_pid_list, " ");
+	char _ = token[0];
+
+	// Pegamos os próximos números
+	for (int i = 0; i < 3; i++) {
+	   token = strtok(NULL, " ");
+	   pid[i] = atof(token);
+	}
+
+	for(int i=0; i<3; i++)
+	{
+		motors_data[i].PID[0] = pid[0];
+		motors_data[i].PID[1] = pid[1];
+		motors_data[i].PID[2] = pid[2];
+	}
 }
 
 void set_motors_velocity(int32_t *velocity_list)
@@ -146,6 +167,7 @@ void motor_pid_control_thread_entry(unsigned long thread_input)
 	unsigned long atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
 	uint32_t last_time_ms = atual_ms;
 	int first_time = 1;
+	int motor_vel_pwm[3] = {0};
 
 
 	while(1){
@@ -153,7 +175,6 @@ void motor_pid_control_thread_entry(unsigned long thread_input)
 			first_time = 0;
 		}
 		else{
-			int motor_vel_pwm[3] = {0};
 			atual_ms = (tx_time_get() * 1000) / TX_TIMER_TICKS_PER_SECOND;
 			uint32_t dt = atual_ms - last_time_ms;
 
@@ -180,11 +201,13 @@ void motor_pid_control_thread_entry(unsigned long thread_input)
 //				derivate[i] 	= (error[i] - last_error[i])/dt;
 
 				last_error[i] = error[i];
-				motor_vel_pwm[i] = motors_data[i].PID[0] * error[i] +
-										  motors_data[i].PID[1] * integral[i];
-//										  motors_data[i].PID[2] * derivate[i]);
+				motor_vel_pwm[i] += motors_data[i].PID[0] * error[i] +  motors_data[i].PID[1] * integral[i] + motors_data[i].PID[2] * derivate[i];
 				motors_data[i].PWM = motor_vel_pwm[i];
 
+				if(abs(motor_vel_pwm[i]) >= 100000)
+				{
+					motor_vel_pwm[i] = abs(motor_vel_pwm[i])/motor_vel_pwm[i] * -15;
+				}
 			}
 			update_velocity(motor_vel_pwm);
 		}

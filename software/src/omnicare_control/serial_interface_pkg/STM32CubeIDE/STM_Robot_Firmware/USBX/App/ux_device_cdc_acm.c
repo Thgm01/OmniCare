@@ -125,12 +125,12 @@ VOID USBD_CDC_ACM_ParameterChange(VOID *cdc_acm_instance)
 		{
 		   if(cdc_acm != UX_NULL)
 		   {
-			   char velocity_pwm_rx[40] = {0};
-			   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)velocity_pwm_rx, sizeof(velocity_pwm_rx), &rx_actual_length);
+			   char information_rx[40] = {0};
+			   ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)information_rx, sizeof(information_rx), &rx_actual_length);
 
-			   if (rx_actual_length <= sizeof(velocity_pwm_rx) ) {
-				   if(velocity_pwm_rx[0]=='m')
-					   set_motors_velocity_string(velocity_pwm_rx);
+			   if (rx_actual_length <= sizeof(information_rx) ) {
+				   if(information_rx[0]=='m') set_motors_velocity_string(information_rx);
+				   else if(information_rx[0]=='p') set_pid_config(information_rx);
 			   }
 		   }
 		}

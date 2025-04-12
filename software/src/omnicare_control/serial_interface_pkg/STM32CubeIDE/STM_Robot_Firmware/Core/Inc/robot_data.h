@@ -28,6 +28,8 @@ void set_motors_velocity(int32_t *velocity_list);
 void set_motors_velocity_string(char *velocity_list);
 void update_velocity(int *velocitys_pwm);
 
+void set_pid_config(char *char_pid_list);
+
 void motor_pid_control_thread_entry(unsigned long thread_input);
 
 extern const int ENCODERS_DIRECTION[];
