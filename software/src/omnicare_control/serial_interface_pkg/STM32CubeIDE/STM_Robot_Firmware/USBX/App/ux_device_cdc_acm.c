@@ -153,11 +153,14 @@ VOID usbx_cdc_acm_write_thread_entry(ULONG thread_input)
     {
     	char encoder_message[40];
 
-    	sprintf(encoder_message, "%" PRId32 " %" PRId32 " %" PRId32 " %" PRId32 "\n",
-    			motors_data[0].atual_velocity,
-				motors_data[0].error,
-				motors_data[0].dt,
-				motors_data[0].PWM);
+    	sprintf(encoder_message, "%" PRId32 " %" PRId32 " %" PRId32 "\n",
+    			motors_data[0].encoder_actual_count,
+				motors_data[1].encoder_actual_count,
+				motors_data[2].encoder_actual_count);
+
+//				motors_data[0].error,
+//				motors_data[0].dt,
+//				motors_data[0].PWM);
 //    	sprintf(encoder_message, "100 200 300\n");
 
 
