@@ -21,7 +21,6 @@ setup(
     entry_points={
         'console_scripts': [
             'serial_interface = serial_interface_pkg.serial_interface:main',
-            'plot_node = serial_interface_pkg.plotNode:main'
         ],
     },
 )
