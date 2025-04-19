@@ -20,16 +20,16 @@ def generate_launch_description():
         description='Flag to set log level')
 
     simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/simulation.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_simulation'), '/launch/simulation.launch.py']),
            launch_arguments={
-                'world_path': [get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+                'world_path': [get_package_share_directory('omnicare_simulation'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
             }.items(),
     )
 
     robot = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/load.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_bringup'), '/launch/load_sim_robot.launch.py']),
            launch_arguments={
-                'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/rviz/mapping_cartographer.rviz'],
+                'rvizconfig': [get_package_share_directory('navigation_pkg'), '/config/rviz/mapping_cartographer.rviz'],
             }.items(),
     )
 
@@ -39,7 +39,7 @@ def generate_launch_description():
         name='cartographer_node',
         output='log',
         remappings=[
-            ('scan', 'scan'),
+            ('laser', 'scan'),
             ('imu', 'imu'),
         ],
         parameters=[{

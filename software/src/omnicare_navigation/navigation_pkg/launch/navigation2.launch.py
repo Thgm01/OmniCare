@@ -11,9 +11,9 @@ from launch.actions import DeclareLaunchArgument, ExecuteProcess, SetEnvironment
 def generate_launch_description():
 
     simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/simulation.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_simulation'), '/launch/simulation.launch.py']),
            launch_arguments={
-                'world_path': [get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+                'world_path': [get_package_share_directory('omnicare_simulation'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
             }.items(),
     )
 
@@ -21,9 +21,9 @@ def generate_launch_description():
 
 
     load_robot = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'),'/launch/load_robot.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_bringup'),'/launch/load_sim_robot.launch.py']),
         launch_arguments={
-            'rvizconfig': [get_package_share_directory('navigation_pkg'), '/config/rviz/navigation.rviz'],
+            'rvizconfig': [get_package_share_directory('omnicare_simulation'), '/config/rviz/navigation.rviz'],
         }.items()
 
         
@@ -49,15 +49,15 @@ def generate_launch_description():
     )
 
 
-    checkpoint = Node(
-        package='simulation_pkg',
-        executable='checkpoints',
-        name='checkpoints',
-        parameters=[{
-            'checkpoints_file': get_package_share_directory('simulation_pkg')+'/config/map/checkpoints.json'
-        }],
-        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
-    )
+    # checkpoint = Node(
+    #     package='simulation_pkg',
+    #     executable='checkpoints',
+    #     name='checkpoints',
+    #     parameters=[{
+    #         'checkpoints_file': get_package_share_directory('simulation_pkg')+'/config/map/checkpoints.json'
+    #     }],
+    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
+    # )
 
 # -----------------------------------------------------
 

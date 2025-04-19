@@ -24,7 +24,7 @@
   <gazebo reference="lidar_link">
     <sensor type="ray" name="head_hokuyo_sensor">
       <visualize> false </visualize>
-      <updateRate>30</updateRate>
+      <updateRate>20</updateRate>
       <ray>
         <scan>
           <horizontal>
@@ -35,7 +35,7 @@
           </horizontal>
         </scan>
         <range>
-          <min>0.1</min>
+          <min>0.4</min>
           <max>40.0</max>
           <resolution>0.05</resolution>
         </range>
@@ -70,7 +70,7 @@
     <gravity>true</gravity>
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
-      <update_rate>100</update_rate>
+      <update_rate>20</update_rate>
       <visualize>true</visualize>
       <topic>imu</topic>
       <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -89,13 +89,12 @@
       <pose>0 0 0 0 0 0</pose>
     </sensor>
   </gazebo>
-
   <gazebo>
     <plugin name="joint_state" filename="libgazebo_ros_joint_state_publisher.so">
       <ros>
         <remapping>~/out:=joint_states</remapping>
       </ros>
-      <update_rate>30</update_rate>
+      <update_rate>20</update_rate>
 
       <!-- Wheels -->
       <joint_name>wheel1_speed</joint_name>
