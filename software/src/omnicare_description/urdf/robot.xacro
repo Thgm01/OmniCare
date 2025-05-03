@@ -11,8 +11,12 @@
     </xacro:unless>
 
 
-    <!-- <xacro:include filename="$(find omnicare_description)/urdf/robot.gazebo" /> -->
-    <!-- <xacro:include filename="$(find omnicare_description)/urdf/ros2_control.xacro" /> -->
+    <link name="lidar_link"></link>
+    <joint name="lidar_to_base" type="fixed">
+        <parent link="base_link" />
+        <child link="lidar_link" />
+        <origin rpy="0.0 0 3.14" xyz="0 0 0" />
+    </joint>
 
 
     <joint name="base_footprint_to_base_link" type="fixed">
