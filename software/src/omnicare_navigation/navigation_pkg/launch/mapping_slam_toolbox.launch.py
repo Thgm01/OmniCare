@@ -21,24 +21,24 @@ def generate_launch_description():
         choices=['DEBUG','INFO','WARN','ERROR','FATAL'],
         description='Flag to set log level')
 
-    simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/simulation.launch.py']),
-           launch_arguments={
-                'world_path': [get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
-            }.items(),
-    )
+    # simulation = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/simulation.launch.py']),
+    #        launch_arguments={
+    #             'world_path': [get_package_share_directory('simulation_pkg'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+    #         }.items(),
+    # )
 
-    robot = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/load.launch.py']),
-           launch_arguments={
-                'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/rviz/mapping_slam_toolbox.rviz'],
-            }.items(),
-    )
+    # robot = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([get_package_share_directory('simulation_pkg'), '/launch/load.launch.py']),
+    #        launch_arguments={
+    #             'rvizconfig': [get_package_share_directory('simulation_pkg'), '/config/rviz/mapping_slam_toolbox.rviz'],
+    #         }.items(),
+    # )
 
     slam_toobox = Node(
         parameters=[
-          [get_package_share_directory('simulation_pkg'), '/config/slam_toolbox.yaml'],
-          {'use_sim_time': True}
+          [get_package_share_directory('navigation_pkg'), '/config/nav/slam_toolbox.yaml'],
+          {'use_sim_time': False}
         ],
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
@@ -48,8 +48,8 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(log_level)
-    ld.add_action(simulation)
-    ld.add_action(robot)
+    # ld.add_action(simulation)
+    # ld.add_action(robot)
     ld.add_action(slam_toobox)
 
     return ld
