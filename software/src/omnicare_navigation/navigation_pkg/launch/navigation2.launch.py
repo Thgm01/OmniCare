@@ -10,24 +10,24 @@ from launch.actions import DeclareLaunchArgument, ExecuteProcess, SetEnvironment
 
 def generate_launch_description():
 
-    simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_simulation'), '/launch/simulation.launch.py']),
-           launch_arguments={
-                'world_path': [get_package_share_directory('omnicare_simulation'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
-            }.items(),
-    )
+#     simulation = IncludeLaunchDescription(
+#         PythonLaunchDescriptionSource([get_package_share_directory('omnicare_simulation'), '/launch/simulation.launch.py']),
+#            launch_arguments={
+#                 'world_path': [get_package_share_directory('omnicare_simulation'), '/simulation/worlds/simple_room_with_fixed_boxes.world'],
+#             }.items(),
+#     )
 
-# -----------------------------------------------------
+# # -----------------------------------------------------
 
 
-    load_robot = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('omnicare_bringup'),'/launch/load_sim_robot.launch.py']),
-        launch_arguments={
-            'rvizconfig': [get_package_share_directory('omnicare_simulation'), '/config/rviz/navigation.rviz'],
-        }.items()
+#     load_robot = IncludeLaunchDescription(
+#         PythonLaunchDescriptionSource([get_package_share_directory('omnicare_bringup'),'/launch/load_sim_robot.launch.py']),
+#         launch_arguments={
+#             'rvizconfig': [get_package_share_directory('omnicare_simulation'), '/config/rviz/navigation.rviz'],
+#         }.items()
 
         
-    )
+#     )
 
 
 # -----------------------------------------------------
@@ -35,11 +35,11 @@ def generate_launch_description():
     bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory('nav2_bringup'),'/launch/bringup_launch.py']),
         launch_arguments={
-            'namespace': LaunchConfiguration('namespace'),
+            # 'namespace': LaunchConfiguration('namespace'),
             'use_namespace': 'False',
             'slam': 'False',
-            'map': [get_package_share_directory('navigation_pkg'),'/config/map/map.yaml'],
-            'use_sim_time': 'True',
+            'map': [get_package_share_directory('navigation_pkg'),'/config/map/quinto_andar-fix.yaml'],
+            'use_sim_time': 'False',
             # 'params_file': [get_package_share_directory('nav2_bringup'),'/params/nav2_params.yaml'],
             'params_file': [get_package_share_directory('navigation_pkg'),'/config/nav/nav2_params.yaml'],
             'autostart': 'True',
@@ -63,8 +63,8 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    ld.add_action(simulation)
-    ld.add_action(load_robot)
+    # ld.add_action(simulation)
+    # ld.add_action(load_robot)
     ld.add_action(bringup_cmd)
     # ld.add_action(checkpoint)
 
