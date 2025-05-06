@@ -1,11 +1,12 @@
 from ament_index_python.packages import get_package_share_path
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess,RegisterEventHandler, TimerAction
+from launch.actions import DeclareLaunchArgument, ExecuteProcess,RegisterEventHandler, TimerAction, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import Command, LaunchConfiguration
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch_ros.actions import Node
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
 import os
@@ -20,10 +21,17 @@ def generate_launch_description():
         description='Top-level namespace')
 
     urdf_path = get_package_share_path('omnicare_description')
-    rviz_path = get_package_share_path('omnicare_simulation')
+    rviz_path = get_package_share_path('navigation_pkg')
 
     default_model_path = urdf_path / 'urdf/robot.xacro'
     default_rviz_config_path = rviz_path / 'config/rviz/robot.rviz'
+
+    rplidar_launch_path = os.path.join(
+        get_package_share_directory('rplidar_ros'),
+        'launch',
+        'rplidar_c1_launch.py'
+    )
+
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
@@ -33,6 +41,13 @@ def generate_launch_description():
                                      description='Absolute path to rviz config file')
     use_sim_time_arg = DeclareLaunchArgument(name='use_sim_time', default_value='false',
                                             description='Flag to enable use_sim_time')
+    
+
+    teleop_joy_arg = DeclareLaunchArgument(name='teleop', default_value='false',
+                                            description='Flag to enable the teleoperation')
+
+    
+    
     
 
     robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model'),' sim_mode:=', LaunchConfiguration('use_sim_time')]),
@@ -70,6 +85,28 @@ def generate_launch_description():
             remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
     )
 
+    rplidar_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('rplidar_ros'),
+                    'launch',
+                    'rplidar_c1_launch.py'
+                )
+            )
+    )
+
+
+        # Path to your teleop launch file (example)
+    teleop_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('omnicare_bringup'),
+                'launch',
+                'teleop_twist.launch.py'
+            )
+        ),
+        condition=IfCondition(LaunchConfiguration('teleop'))
+    )
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
     controller_params_file =  os.path.join(get_package_share_directory('omnidirectional_controllers'), 'config/omnidirectional_controller.yaml') 
     
@@ -130,6 +167,8 @@ def generate_launch_description():
         parameters=[os.path.join(get_package_share_path('navigation_pkg'), 'config/nav/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
+        
+
 
     
     return LaunchDescription([
@@ -139,8 +178,11 @@ def generate_launch_description():
         model_arg,
         rviz_arg,
         use_sim_time_arg,
+        teleop_joy_arg,
         robot_state_publisher_node, # publica o robô em si (URDF)
         rviz_node, #RVIZ2 para debug
+        rplidar_launch,
+        teleop_launch,
         # twist_mux, #MUX de prioridade das velocidades
         delayed_controller_manager, #ROS2_CONTROL
         omni_base_controller_event_handler, #ROS2_CONTROL
