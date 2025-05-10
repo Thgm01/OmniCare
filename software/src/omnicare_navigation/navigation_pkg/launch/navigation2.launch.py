@@ -38,7 +38,7 @@ def generate_launch_description():
             # 'namespace': LaunchConfiguration('namespace'),
             'use_namespace': 'False',
             'slam': 'False',
-            'map': [get_package_share_directory('navigation_pkg'),'/config/map/quinto_andar-fix.yaml'],
+            'map': [get_package_share_directory('navigation_pkg'),'/config/map/QuintoAndarFull.yaml'],
             'use_sim_time': 'False',
             # 'params_file': [get_package_share_directory('nav2_bringup'),'/params/nav2_params.yaml'],
             'params_file': [get_package_share_directory('navigation_pkg'),'/config/nav/nav2_params.yaml'],

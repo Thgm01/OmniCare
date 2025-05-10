@@ -3,7 +3,7 @@ from ament_index_python.packages import get_package_share_path
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess,RegisterEventHandler, TimerAction, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -41,6 +41,10 @@ def generate_launch_description():
                                      description='Absolute path to rviz config file')
     use_sim_time_arg = DeclareLaunchArgument(name='use_sim_time', default_value='false',
                                             description='Flag to enable use_sim_time')
+
+    mapping_arg = DeclareLaunchArgument(name='mapping', default_value='false',
+                                            description='Flag to enable the mapping mode')
+
     
 
     teleop_joy_arg = DeclareLaunchArgument(name='teleop', default_value='false',
@@ -94,6 +98,19 @@ def generate_launch_description():
                 )
             )
     )
+
+    laser_filter = Node(
+                package="laser_filters",
+                executable="scan_to_scan_filter_chain",
+                parameters=[
+                    PathJoinSubstitution([
+                        get_package_share_directory("navigation_pkg"),
+                        "config/nav", "box_filter.yaml",
+                    ])],
+                condition=IfCondition(LaunchConfiguration('mapping'))
+        )
+
+
 
 
         # Path to your teleop launch file (example)
@@ -178,10 +195,12 @@ def generate_launch_description():
         model_arg,
         rviz_arg,
         use_sim_time_arg,
+        mapping_arg,
         teleop_joy_arg,
         robot_state_publisher_node, # publica o robô em si (URDF)
         rviz_node, #RVIZ2 para debug
         rplidar_launch,
+        laser_filter,
         teleop_launch,
         # twist_mux, #MUX de prioridade das velocidades
         delayed_controller_manager, #ROS2_CONTROL
