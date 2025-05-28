@@ -4,6 +4,7 @@
 Este repositório reúne os arquivos de desenvolvimento do projeto **OmniCare**, um robô móvel omnidirecional modularizado, voltado para aplicação em ambientes hospitalares com a capacidade de deslocamento autônomo entre andares utilizando elevadores. O projeto integra o Trabalho de Conclusão de Curso (TCC) em Engenharia de Robôs pela FEI.
 
 ## 📄 Sobre o Projeto
+O desenvolvimento foi realizado com base em uma **estrutura modular omnidirecional**, composta por:
 
 - Um **manipulador cartesiano** responsável por interações físicas com o ambiente (ex.: acionamento de botões de elevador);
 - Uma **arquitetura elétrica integrada** com sensores, atuadores e microcontrolador STM32;
