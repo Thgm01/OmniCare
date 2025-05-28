@@ -5,10 +5,9 @@ Este repositório reúne os arquivos de desenvolvimento do projeto **OmniCare**,
 
 ## 📄 Sobre o Projeto
 
-Desenvolveu-se com base em uma **estrutura modular omnidirecional**, contando com:
-- Um **manipulador cartesiano** para acionamento de botões (como os de elevadores);
-- Uma **arquitetura elétrica integrada** com sensores, atuadores e controle embarcado;
-- Sistema de controle e navegação autônoma com uso de pacotes do **ROS 2 Humble (Slam Toolbox e NAV2)**.
+- Um **manipulador cartesiano** responsável por interações físicas com o ambiente (ex.: acionamento de botões de elevador);
+- Uma **arquitetura elétrica integrada** com sensores, atuadores e microcontrolador STM32;
+- Sistema de **controle e navegação autônoma via ROS 2**, com mapeamento, localização, navegação e simulação.
 
 ## 📁 Estrutura do Repositório
 
@@ -60,4 +59,11 @@ Graduando em Engenharia de Robôs – Centro Universitário FEI
 Área: Mecânica  
 [LinkedIn](https://www.linkedin.com/in/leonardo-quirino-353486218/)
 
+## 📝 Licença
+
+Este projeto está licenciado sob a Licença MIT.
+
+Isso significa que você pode usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do software, desde que mantenha o aviso de copyright e a permissão de licença incluídos em todas as cópias ou partes substanciais do software.
+
+Para mais detalhes, consulte o arquivo [LICENSE](LICENSE).
 
