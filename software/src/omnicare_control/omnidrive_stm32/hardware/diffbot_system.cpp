@@ -273,7 +273,7 @@ namespace omnidrive_stm32
     {
       return hardware_interface::return_type::ERROR;
     }
-    float radius = 0.140;
+    // float radius = 0.140;
 
     // // 
     // // V = Omega * R (m/s) --> V = wheel_l_.cmd (rad/s) * radius (m)

@@ -62,7 +62,6 @@ class Robot(Node):
     def run(self):
         self.get_logger().info ('Entrando no loop princial do nó.')
         while(rclpy.ok): 
-            Failed to load plugin libgazebo_ros_control.so: libgazebo_ros_control.so: cannot open shared object file: No such file or directory
             rclpy.spin_once(self)
 
 
