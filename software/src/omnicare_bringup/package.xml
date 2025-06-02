@@ -7,6 +7,17 @@
   <maintainer email="llagoeiro@outlook.com.br">llagoeiro</maintainer>
   <license>Apache-2.0</license>
 
+  <depend>robot_localization</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>twist_mux</depend>
+  <depend>laser_filters</depend>
+  <depend>controller_manager</depend>
+  <depend>gazebo_ros</depend>
+  <depend>joy</depend>
+  <depend>teleop_twist_joy</depend>
+  
+  
+
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>

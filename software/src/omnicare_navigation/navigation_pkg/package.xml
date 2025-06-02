@@ -7,6 +7,41 @@
   <maintainer email="llagoeiro@outlook.com.br">llagoeiro</maintainer>
   <license>Apache-2.0</license>
 
+  <depend>nav2_amcl</depend>
+  <depend>nav2_behavior_tree</depend>
+  <depend>nav2_behaviors</depend>
+  <depend>nav2_bringup</depend>
+  <depend>nav2_bt_navigator</depend>
+  <depend>nav2_collision_monitor</depend>
+  <depend>nav2_common</depend>
+  <depend>nav2_constrained_smoother</depend>
+  <depend>nav2_controller</depend>
+  <depend>nav2_core</depend>
+  <depend>nav2_costmap_2d</depend>
+  <depend>nav2_dwb_controller</depend>
+  <depend>nav2_graceful_controller</depend>
+  <depend>nav2_lifecycle_manager</depend>
+  <depend>nav2_map_server</depend>
+  <depend>nav2_mppi_controller</depend>
+  <depend>nav2_msgs</depend>
+  <depend>nav2_navfn_planner</depend>
+  <depend>nav2_planner</depend>
+  <depend>nav2_regulated_pure_pursuit_controller</depend>
+  <depend>nav2_rotation_shim_controller</depend>
+  <depend>nav2_rviz_plugins</depend>
+  <depend>nav2_simple_commander</depend>
+  <depend>nav2_smac_planner</depend>
+  <depend>nav2_smoother</depend>
+  <depend>nav2_system_tests</depend>
+  <depend>nav2_theta_star_planner</depend>
+  <depend>nav2_util</depend>
+  <depend>nav2_velocity_smoother</depend>
+  <depend>nav2_voxel_grid</depend>
+  <depend>nav2_waypoint_follower</depend>
+
+  <depend>slam_toolbox</depend>
+
+
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
