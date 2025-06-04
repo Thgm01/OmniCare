@@ -39,6 +39,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'checkpoints = navigation_pkg.checkpoints:main',
+            'checkpointsServices = navigation_pkg.saveCheckpointsService:main'
         ],
     },
 )

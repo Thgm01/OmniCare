@@ -38,7 +38,7 @@ def generate_launch_description():
             # 'namespace': LaunchConfiguration('namespace'),
             'use_namespace': 'False',
             'slam': 'False',
-            'map': [get_package_share_directory('navigation_pkg'),'/config/map/QuintoAndarFull.yaml'],
+            'map': [get_package_share_directory('navigation_pkg'),'/config/map/tcc_presentation_3.yaml'],
             'use_sim_time': 'False',
             # 'params_file': [get_package_share_directory('nav2_bringup'),'/params/nav2_params.yaml'],
             'params_file': [get_package_share_directory('navigation_pkg'),'/config/nav/nav2_params.yaml'],
@@ -49,23 +49,29 @@ def generate_launch_description():
     )
 
 
-    # checkpoint = Node(
-    #     package='simulation_pkg',
-    #     executable='checkpoints',
-    #     name='checkpoints',
-    #     parameters=[{
-    #         'checkpoints_file': get_package_share_directory('simulation_pkg')+'/config/map/checkpoints.json'
-    #     }],
-    #     arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
-    # )
+    checkpoint = Node(
+        package='navigation_pkg',
+        executable='checkpoints',
+        name='checkpoints',
+        parameters=[{
+            'checkpoints_file': get_package_share_directory('navigation_pkg')+'/config/map/presentation_checkpoints.json'
+        }],
+        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
+    )
+
+    checkpointSaver = Node(
+        package='navigation_pkg',
+        executable='checkpointsServices',
+        name='checkpointsServices',
+        arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
+    )
+
 
 # -----------------------------------------------------
 
     ld = LaunchDescription()
-
-    # ld.add_action(simulation)
-    # ld.add_action(load_robot)
     ld.add_action(bringup_cmd)
-    # ld.add_action(checkpoint)
+    ld.add_action(checkpoint)
+    ld.add_action(checkpointSaver)
 
     return ld
