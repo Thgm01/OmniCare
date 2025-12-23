@@ -306,23 +306,3 @@ Para mais detalhes, consulte o arquivo [LICENSE](LICENSE).
 ## 📝 TODO — Documentação dos Pacotes
 
 A seguir está o checklist de pacotes do OmniCare que terão documentação detalhada seguindo o mesmo padrão adotado no `omnicare_behavior`.
-
-### 📦 Pacotes ROS 2
-
-- [x] **omnicare_behavior** — Behavior Manager (FSM, Action Server, multi-andares)
-- [x] **omnicare_bringup** — Inicialização do robô (real e simulação)
-- [x] **omnicare_control**
-  - [x] omnidrive_stm32
-  - [x] serial_interface_pkg
-- [x] **omnicare_description** — URDF, meshes e plugins
-- [x] **omnicare_hri**
-  - [x] omnicare_expression
-- [x] **omnicare_msgs** — Mensagens, serviços e actions customizadas
-- [x] **omnicare_navigation** — Nav2, LiDAR, IMU e mapeamento
-  - [x] navigation_pkg
-- [x] **omnicare_simulation** — Gazebo, launches e serviços de teleporte
-- [x] **omnicare_vision**
-  - [x] floor_detector
-  - [x] dataset_generator
-
-
