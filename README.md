@@ -311,10 +311,10 @@ A seguir está o checklist de pacotes do OmniCare que terão documentação deta
 
 - [x] **omnicare_behavior** — Behavior Manager (FSM, Action Server, multi-andares)
 - [x] **omnicare_bringup** — Inicialização do robô (real e simulação)
-- [ ] **omnicare_control**
+- [x] **omnicare_control**
   - [x] omnidrive_stm32
-  - [ ] serial_interface_pkg
-- [ ] **omnicare_description** — URDF, meshes e plugins
+  - [x] serial_interface_pkg
+- [x] **omnicare_description** — URDF, meshes e plugins
 - [ ] **omnicare_hri**
   - [ ] omnicare_expression
 - [ ] **omnicare_msgs** — Mensagens, serviços e actions customizadas
