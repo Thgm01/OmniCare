@@ -315,14 +315,14 @@ A seguir está o checklist de pacotes do OmniCare que terão documentação deta
   - [x] omnidrive_stm32
   - [x] serial_interface_pkg
 - [x] **omnicare_description** — URDF, meshes e plugins
-- [ ] **omnicare_hri**
-  - [ ] omnicare_expression
-- [ ] **omnicare_msgs** — Mensagens, serviços e actions customizadas
-- [ ] **omnicare_navigation** — Nav2, LiDAR, IMU e mapeamento
-  - [ ] navigation_pkg
-- [ ] **omnicare_simulation** — Gazebo, launches e serviços de teleporte
-- [ ] **omnicare_vision**
-  - [ ] floor_detector
-  - [ ] dataset_generator
+- [x] **omnicare_hri**
+  - [x] omnicare_expression
+- [x] **omnicare_msgs** — Mensagens, serviços e actions customizadas
+- [x] **omnicare_navigation** — Nav2, LiDAR, IMU e mapeamento
+  - [x] navigation_pkg
+- [x] **omnicare_simulation** — Gazebo, launches e serviços de teleporte
+- [x] **omnicare_vision**
+  - [x] floor_detector
+  - [x] dataset_generator
 
 

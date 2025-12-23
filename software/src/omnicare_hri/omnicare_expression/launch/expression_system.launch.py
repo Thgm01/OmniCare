@@ -25,13 +25,5 @@ def generate_launch_description():
             executable='expressionService',
             name='expression_service',
             output='screen'
-        ),
-        
-        # ======= Serviço da Marcha Imperial =======
-        Node(
-            package='omnicare_expression',
-            executable='imperialMarchService',
-            name='imperial_march_service',
-            output='screen'
-        ),
+        ),        
     ])
