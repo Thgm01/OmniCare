@@ -46,6 +46,7 @@ O projeto envolve integração profunda de **ROS 2**, **STM32**, **percepção c
 │   └── sync_omnicare.sh # Script para rsync nootebook --> jetson
 │
 ├── software/src/ # ROS 2 workspace
+│   ├── omnicare_behavior/ # Contem o Behavior Manager (FSM)
 │   ├── omnicare_bringup/ # Launch principal do OmniCare
 │   ├── omnicare_control/ # Controle de movimento do robô
 │   ├── omnicare_description/ # Descrição do robô (URDF/XACRO)
@@ -217,7 +218,7 @@ O software do OmniCare é composto por múltiplos pacotes ROS 2, cada um contend
 ---
 
 ### 🔹 [omnicare_behavior](software/src/omnicare_behavior/)
-O pacote **omnicare_behavior**, a máquina de estados responsável por coordenar toda a missão do robô. É ele quem controla o fluxo completo da navegação entre diferentes andares, integrando percepção, navegação, manipulação e troca de mapas. O Behavior Manager decide quando iniciar a navegação, alinhar ao elevador, interagir com o painel, trocar de mapa no momento correto e retomar o trajeto até o destino final.
+O pacote **omnicare_behavior** contem a máquina de estados responsável por coordenar toda a missão do robô. É ele quem controla o fluxo completo da navegação entre diferentes andares, integrando percepção, navegação, manipulação e troca de mapas. O Behavior Manager decide quando iniciar a navegação, alinhar ao elevador, interagir com o painel, trocar de mapa no momento correto e retomar o trajeto até o destino final.
 
 ---
 
